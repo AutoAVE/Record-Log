@@ -11,12 +11,12 @@ Baseline仓库地址:  https://github.com/kl2806/ropes-leaderboard-example
 * 目前的阅读里理解数据集以及模型都是基于文章内容进行的，其实本质上是考察的机器对于 Loacal PAS的理解. 
 
 ## 笔记    PPT-图片形式:    
-![ROPES数据集_1](./../../图片/00029_ROPES数据集_1.png)  
-![ROPES_2](./../../图片/00030_REPOS数据集_2.png)  
-![ROPES_3](./../../图片/00031_ROPES数据集_3.png)      
-![ROPES_4](./../../图片/00032_ROPES数据集_4.png)
-![ROPES_5](./../../图片/00033_ROPES数据集_5.png)   
-![ROPES_7](./../../图片/00034_ROPES数据集_7.png)    
+![ROPES数据集_1]((https://github.com/AutoAVE/Record-Logger/blob/master/图片/00029_ROPES数据集_1.png)  
+![ROPES_2]((https://github.com/AutoAVE/Record-Logger/blob/master/图片/00030_REPOS数据集_2.png)  
+![ROPES_3]((https://github.com/AutoAVE/Record-Logger/blob/master/图片/00031_ROPES数据集_3.png)      
+![ROPES_4]((https://github.com/AutoAVE/Record-Logger/blob/master/图片/00032_ROPES数据集_4.png)
+![ROPES_5]((https://github.com/AutoAVE/Record-Logger/blob/master/图片/00033_ROPES数据集_5.png)   
+![ROPES_7]((https://github.com/AutoAVE/Record-Logger/blob/master/图片/00034_ROPES数据集_7.png)    
 
 ### 数据集后续相关工作:   
 1. Baseline：   
