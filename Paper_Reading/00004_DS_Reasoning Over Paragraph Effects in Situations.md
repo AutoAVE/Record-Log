@@ -1,6 +1,10 @@
 # 文章: Reasoning Over Paragraph Effects in Situations  
+EMNLP2019   |    AI2     |   数据集文章  
+
 
 ## 文章链接: 
+Arxiv: https://arxiv.org/abs/1908.05852   
+EMNLP2019网站：  
 ## 文章 baseline地址: 
 Leadboard地址：   https://leaderboard.allenai.org/ropes/submissions/public      
 Baseline仓库地址:  https://github.com/kl2806/ropes-leaderboard-example    
