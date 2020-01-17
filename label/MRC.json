@@ -1,0 +1,1464 @@
+数据集： 推理能力、答案形式、domain、数据集来源、数据集收集形式
+
+-----------------------------------------------------------------------MRC数据集整理-----------------------------------------------------------------
+####  数据集整理： 
+@    1. CosMos:   20190831  事件为中心的常识推理;                                    选择题      
+{   
+    重点: 从字里行间解读人们的日常叙述，提出关于事件的可能原因或影响的问题，这些问我呢提需要在语境中进行超越文本范围的推理; 
+     Cosmos QA is a large-scale dataset of 35.6K problems that require commonsense-based reading comprehension, 
+     formulated as multiple-choice questions. It focuses on reading between the lines over a diverse collection 
+     of people's everyday narratives, asking questions concerning on the likely causes or effects of events 
+     that require reasoning beyond the exact text spans in the context.
+}
+@    2. Multi-RC: NAACL2018  正确答案选项不止一个; 未知正确选项答案；   来源： 其他好多数据集组合： CNN、WSJ、NYT、Wikipedia articles 、 Fiction             选择题、
+@    3. CommonSenseQA: 20190615   主要几种在 ConceptNet上的几种关系推理： AtLocation 、 Causes 、 CapableOf                       选择题、常识
+@    4. OpenBookQA: 20180908  需要中间事实载体链接  问题和答案；  选择题，需要一定的 Science Fact 知识然后接着进行推理；             选择题、知识
+@    5. QuoRef: 20190816   主要集中于  问题和文章中对应的共指问题；  代词性(69%)、名词性(54%)、多共指(32%)、常识推理(10%)             span
+@    6. Drop: 20190301   段落之上的 离散推理： 加、减、比较、计数 等·                                                           生成、span、离散推理
+@    7. Social IQA: 20190909   主要集中于  社交中的  情绪和社交智商的  常识推理                                                 选择题、常识、社交                                                                                                     选择题
+8.HellaSwag: 20190319   CommonSense NLI数据集
+@    9. McTaco: 20190906   按照QA的形式对于事件5中常见的时序关系进行提问，正确答案可能不止一个，来源于MultiRC,
+                      持续时间(事件持续的时间)、时间顺序(事件的典型顺序)、典型事件(事件发生的时间)、频率(事件发生的频率)、平稳性(状态是否保持很长时间还是无限期)         选择题
+
+
+
+10. WSC: 20190724  在原来WSC数据集基础上用对抗方式构建的更大、更难的  关于 代词解析常识推理 的数据集； 
+@   11. DREAM[开源]: 20190201 NAACL2019 护士发起，然后使用种子利用模板生成的 医患对话数据集 。  问题有推理： 摘要、logic、数学、常识                   选择题、对话
+@   12. HotpotQA： 多跳数据集； 有证据 ；  wikipedia+ wikidata                                            span、Multi-hop
+@   13. WikihopQA:  多跳数据集； 无证据；  wikipedia                                         选择题、Multi-hop
+@   14. CoQA:  2018 QuAC之前    1.考虑会话历史 2. 话题转变 3.包含 In-domain、Out-domain多个数据来源 4. 词汇匹配29.8 解释43.0 语用27.2  5. 明显共指、阴性共指、无                  答案类型：free-form text、 Yes、No、 Unknown. Each answer come with a text span rationale   数据来源很多
+@   15. QuAC: 20181028  加入对话acts,比如： 是否follow-up 历史问题； 问题更难；                     Free-form|yes|no|unknown         Wikipedia
+16. DREAM: 
+
+@   17. RACE: 2017                                                  选择题、高中、初中 英语考试
+18. NarrativeQA: 2018                                           Free-form text、        来源： Movie Scripts、Literature
+19. MCTest: 2013                                                Multi-choice            来源： Children*s stories 
+20. CNN/Daily Mail: 2015                                        spans、                 来源： News
+21. Children*s book test: 2016                                  Multi-choice            来源： Children*s stories
+22. SQuAD 1.1: 2016                                             Spans                   来源： Wikipedia
+23. MS MARCO: 2016                                              Free-form text          来源： Web Search 
+
+* Open-domain QA 
+24. NewsQA: 2017                                                Spans                   来源： News
+25. SearchQA: 2017                                              Spans                   来源： Jeopardy
+26. TriviaQA: 2017                                              Spans                   来源： Trivia
+27. Quasar-T: 
+
+27. C*3 [未开源] 20190430    中文Multi-Choice RC                选择题、不能简单的 Surface-form Marching 、 需要先验知识：1) Linguistic;  2)Domain-specfic; 3) General World
+28. TweetQA 20190614  Social Medial; 
+29. GeoSQA  20190829                                                               
+30. HEAD-QA  20190611   A Healthcare Dataset for Complex Reasoning ; 
+31. ReCoRD   20181030                                          完形填空类 Query; 常识推理； 
+32. PubMedQA: 20190913  关于 生物医学研究的数据集；   其中数据集中有： 标注的、未标注的、非专业标注的；    
+
+
+* Answer Selection 
+33. WikiQA: 
+34. TREC-QA: 
+
+
+
+
+
+----------------------------------------------------------------MRC Multi-Task Learning --------------------------------------------------------------------------------------
+1.  20190320 Multi-task learning with Sample Re-weight for MRC: 主要是学习： 采样 tast_sample 部分的算法值得学习； 
+2.  20190331 MultiQA: 研究将很多很多的MRC Dataset 数据集结合在一起，研究他们之间的 共性以及相应的 Transfer 关系； 
+
+
+------------------------------------------------------NarrativeQA-----------------------------------------------------------------------------------------
+1. 数据集文章： https://www.aclweb.org/anthology/Q18-1023.pdf    最大的难点： 数据过于长，很难处理； 
+2. 
+3. 
+
+
+------------------------------------------------------ SQuAD等最一般数据集 ----------------------------------------------------------------------------------------------------
+1. 20181115  Read + Verify : 主要解决 Unanswerable Question 
+2. 20190614  Learning to Ask Unanswerable Question:   主要使用如何生成 不可回答的问题，来进行数据增强，然后学会回答 不可回答的问题； 
+3. ICLR2019  GenerateQA    利用生成问句进一步筛选答案的方法，使得模型更具有泛化性；企图真正理解 Whole Question; 
+4. ICLR2017  BiDAF
+5. 20170620  ReasonNet     利用 文章 和  问题 多次进行交互，得到答案； 
+
+
+------------------------------------------------------ Open-Domain QA -------------------------------------------------------------------------------------------
+1. TriviaQA Dataset:  
+2. SearchQA Dataset:
+3. NewsQA   Dataset: 
+4. SQuAD-Open    Dataset: 
+5. Quasar-T  Dataset:
+6. 
+
+
+4. RE*3: Retrive、Read、Rerank     
+5. I-MRC: Interactive MRC: 强化学习--seeking relevant information through sequential decision making; 
+6. ICLR2019: Multi-Step Retriever-Reader Interaction:   
+7. ICLR2018: Evidence Aggregation for Answer Re-Ranking : 
+8. acl2019  RankQA: ... Re-Ranking
+9. 
+
+
+
+
+Multi-task RC 、 Cross-linguic 、 MRC中的分析、 zero-shot MRC 、 一般的融入知识，并不是 推理需求的，比如： SQuAD
+------------------------------------------------------------Other Task 借鉴到 MRC ------------------------------------------------------------------------------------------------
+##### 其他的文章借鉴作用： 
+1. GCN建模对话信息； 对话者说话者 内部，自我 依赖的关系；   
+2. GCN 建模会话信息，Tweet对话中的各个回复之间的关系； 
+3. 多种KB进行融合的规范以及层次结构； 
+4. 人类的各种行为对于MRC的启发； 
+5. QC:问题分类，帮助解决一定的MRC;
+6. Atomic: 将一般 事件中的各种 CommonSense 通过使用 if-then reasoning 包括进去；  
+7. GCN 把 语法、语义结构建模到 word embedding 中去；    ACL2019
+8. GAT、R-GAT、HGAT(异构GAT)、position-aware GCN 、 
+
+
+------------------------------------------------------------MRC一般任务融入知识-----------------------------------------------------------------------------------------
+#### 融知识到MRC----最一般的MRC，而不是专业需要 常识、知识的； 
+1. 融知识，SQuAD1.1  [ KAR ]    1) 数据增强； 2) WordNet  3) 辅助任务学习； 
+2. [KEAG]   MARCO 数据集；  将知识融入到 生成式 的 MRC; 
+3. 利用 Answer Choices 之间的关系；  NLI+QA;                        MultiRC--SemEval2018 
+4. 利用 Multi-task 的方法 将  Relation Knowledge  融入到 常识推理MRC中；        Cloze Story Test &   SemEval-Task 2018    
+
+-----------------------------------------------------------Bert 相关的 预训练、Word Embedding ------------------------------------------------------------------------------------------
+##### Bert相关的 预训练、Word Embedding 等文章； 
+1. GCN直接建模 语法信息； -----直接使用GCN对于结构信息建模； GCN 把 语法、语义结构建模到 word embedding 中去；    ACL2019  
+2. K-Bert ICLR2020  将GCN等建模KB等架构信息建模的 拓扑信息 和 LM建模的 序列信息结合在了一起； 提出了 KN: Knowledge Noise;  HES: 异构向量融合问题； 
+3. XLNet: 
+4. RoBERTa: 
+5. AL-Bert: 
+6. Bert-AL: 
+7. THU-ERIENT: 
+8. BaiDu-ERIENT: 
+9. ConvBert: 
+10.TinyBert: 
+11.StructureBert: 
+12.ON-LSTM: 
+13.Tree-Transformer: 
+14.LAMAL: 
+15.
+
+
+
+----------------------------------------------------------------- MRC中的分析 ------------------------------------------------------------------------------
+##### MRC任务中的分析： 性能分析、对抗分析、模型分析
+1. ICLR2019  不稳定性分析    改变句子的语义，结果应该改变，但是未改变，模型对于语义的改变不敏感； 
+2. GapQA    1) 定义了 Knowledge Gaps;  2) 对其中的一个Gap(Fact to Answer Gap) 构建了一个 Dataset, train a model fill the gap;  
+3. Question Answer is a Format; 重新定义了 MRC，不应该是一个任务，应该是一种 形式； 
+4. acl2019 分析 Multi-hop QA: HotpotQA,简单的将几个问题进行组合并不是真正的 Multi-hop Reasoning ,是虚假的；  通过构建对抗样本进一步说明； 
+5. Avoid Reasoning Shortcuts: 对抗训练、评价对于Multi-hop QA,HotpotQA下面的很多模型都利用了 数据中的线索捷径，并不是真正Multi-hop Reasoning . 并使用 对抗数据 进行测试之前模型； 
+6. EMNLP2019  AdaMRC: Adversarial Domain Adaptation      提出 域适应 的框架: loss1 loss2 单独训练，以及判别器； 现在 Source Domain 上预训练生成器； 
+              并且 SynNet 同样来研究 域适应，文章进行了对比； 
+7. Frustratingly Poor Performances of MRC on Non-Ade Examples: 不像以往的对抗数据来证明MRC 模型不好；  使用很多简单的数据，多种方式证明，现有MRC模型并没有真正的在起作用； 
+8. *** Adversarial Examples for MRC 2017 SQuAD1.1 . 通过简单的构建对抗样本使得模型的性能出现大幅度的下降； 一定程度证明现有的MRC模型对于抗干扰能力不够；   
+9. An Empirical Study of Content Understanding in Conversational Question Answering : CoQA-QuAC [研究类，调研目前做  会话MRC的性能以及 存在的问题; ] 
+{
+出发点: 发现会话阅读理解中的两个最重要的问题并没有得到很好的解决:   多以设置；  different training settings, testing settings 去攻击模型对于 内容的理解;   结果: 存在潜在危险; 
+    1. 模型多大程度上反映了对于  内容或者问题的理解? 
+    2. 模型是否很好的利用了 会话的内容? 
+
+文章关注于: 
+    1. 模型在两个数据集上的效果是否反映了模型的理解?   效果好 ----- 不一定等于 模型做到了 对于任务的理解;
+        *  使用 不同的  training settings 去研究
+    2. 目前的模型是去取得好的效果是做到了 对于 内容的理解;    数据集的设置是  文章中的 span，所以不清楚模型是掌握了 对于文章中  answer的position的学习  还是真正学会了对于 文章内容的理解; 
+        * 使用 different testing settings 去研究
+调研模型: 
+    1. FlowQA
+    2. BERT
+    3. SDNet
+    4. 
+实验结果: 
+    1. CoQA-QuAC 上面好的结果并不能反应  模型对于内容有了一个很好的理解; 
+    2. QuAC上训练的模型对于 之前answer*s position 的重要程度远大于 对于文章内容的理解; 
+
+相关工作:   
+    1. MRC的调研; 
+        1.1 2017---jia 攻击 SQuAD模型;
+        1.2 2018 --- Lipton : 确定MRC需要的能力; 
+        1.3 2017--- 发现如果一个 单词在问题中出现很重要，那么对大问题就可以依据这种 超级的特征去回答问题；
+        1.4 2018 Rondeau --- 同上; 
+        1.5 but:  会话QA很少研究; 2019 --仅仅是比较 CoQA 和 SQuAD20. QuAC的定量，但是没有对 会话QA的方法研究;
+    2. 模型不适用 all useful features is common in deverse areas.
+        2.1 NLI--2019  很依赖于 lexical-leval features but little compositional semantics; 
+        2.2 Dialog Generation --2019 系统不需要了解整个 会话历史;
+        2.3 CV---
+        2.4 作者: positional informational rather than semantic information 被模型利用; 
+文章统计/数据集特征: 
+    1. previrous answer 与 当前的问题 Questions 之间单词之间的重合度分布:  CoQA 几乎百分之 50 以上都有 重合而且很多;  QuAC中大概稍微少一些，之前的 answer与当前的问题之间有重合词;
+    2. Answer format: 
+        2.1 QuAC:Span ; CoQA: 自由文本,但是倾向于span。   
+        2.2 QuAC的answer length 往往比 CoQA答案要长，QuAC各部分切合实际;
+        2.3 CoQA 中答案可以是 yes or no . 
+        2.4 CoQA中 evidence span 是提供的,所以之前的 answer*s position information 仍然和 QuAC直接可使用; 
+    3. 数据收集: 
+        3.1 QuAC: 数据收集中: 问问题的人看不见文章; CoQA:看得见; 
+
+模型分析: 
+    1. FlowQA: 主要是: Integration-Flow 机制: 对于每个问题Question得到一个 Question-aware context representation.   ; 然后使用 Flow将同一个单词不同问题之间的表示进行融合;    后面改进: 问题对于文章的表示也是随着问题的尽心那个更新而更新; 
+                缺点: 1. 太隐式; 2. 只关注与 问题，之前的  answer对于后面的影响也很大; 3. question-aware context reoresentation 是固定的并没有随着时间的进行而进行转换;
+
+    2. Bert: 
+    3. SDNet: 
+
+模型效果好 vs Content Comprehension 
+    1. QuAC: 61% 问题含有到文章的共指实体; 44% 共指到之前的历史。  11% 的问题询问 会话更多信息; 
+    2. CoQA: 49.7% 问题显示共指 到 会话， 19.8% 隐式; 
+    3. 问题与  conversation 的相关性很高，所以期望很好的理解 会话问题的问答;   为了实现这一研究: 假设: 如果模型在 不访问会话内容的情况下就不应该获得高性能;
+    4. 三种设置:
+        4.1 使用最初始的模型设置:
+        4.2 -context  去除先前问题以及问题的答案,但是保留答案在文章中的位置信息; [仅仅是位置信息,并不是文章中对应的答案的span，而且这种文章span文本的丢失造成的语音损失是不容易被其周围的语义所补偿的;]
+        4.3 - conversation: 去除任何历史;  但是文章完全保留; 
+
+        4.4 结果: CoQA-QuAC都是: -context的性能明显好于 -conversation:  表明:好的结果并不一定是  对于文章内容 content understanding; 
+            
+    
+Quetion: 模型理解了  会话内容了吗?
+    1. 上述证明答案位置的重要性; 但是完整的设置并不知道更好的性能是由于理解: 位置 和 内容造成的; 
+    2. Repeat Attack: 增加文中答案之间的距离;   将答案所在的句子进行多次重复,语义没有发生变化，对应的答案也应该不会发生变化; 
+                      # 前一个答案的位置有可能泄露当前答案的位置信息,因此模型可以将与前面答案相邻的句子作为候选; 
+                      # 如果模型是通过理解文章的内容来做回答问题，那应该对于重复攻击是健壮的; 
+
+        2.1  QuAC: FlowQA-Bert 对答案连续之间的距离很敏感; 重复攻击时: 性能下降很明显;   不使用前答案的位置信息的训练形况下,尽管比完整模型性能差很多，但是对于对抗好很多; 
+        2.2 答案位置与模型鲁棒性之间关系: 当前答案和先前答案在文章位置较近时，Bert-FlowQA都可以正确的预测出来;  当距离较近时:重复攻击更有效;  QuAC对于位置比contont敏感的多; 
+        2.3 对于 当前question 是否 flolow up 之前question的攻击: QuAC有注释;   QuAC中follow up 的严重依赖于先前问答位置信息,而不是 contont information; 
+        2.4 不攻击正确,攻击错误例子:  攻击下，FlowQA模型更容易选择下一个span作为答案;  Bert容易选择 非常不可信答案，或者  no ；  
+    3. Predict without Previous Answer Text:  可以用问题但不能用答案; 
+        3.1 模型对于历史答案的敏感度很高; 
+        3.2 很多模型在利用之前答案的时候同时利用了  answer的位置信息; 
+    4. Predict without Previrous Answer position 
+        4.1  CoQA上的 FlowQA很少利用 之前答案的位置信息; 
+    5. QuAC训练的模型高度依赖于 先前答案; 位置信息; 
+    
+总结: 
+    1. QuAC上的高性能并不能反应模型对于 会话内容的理解; 
+    2. QuAC上的模型不一定能学会会话理解;
+未来: 
+    1. 数据集收集:
+        1.1 问题应该更加现实，开放;   QuAC设置中: 如果文章中有3个无法回答的问题,会话就会终止，所以经常问一些保守的问题; 问的问题都可以回答，而且位置很接近;
+    2. 模型设置: 
+        2.1 模型应该设计的更加关注 语义理解; 
+        2.2 目前不清楚如何设计一个自然学习会话理解的模型，应该加强泛化性和鲁棒性; 
+    
+    
+}   
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+-------------------------------------------------------------MRC中跨语言、跨模态、Zero-shot -----------------------------------------------------------------------------------------
+1. 
+2. 
+3. 
+4. XCMRC: 
+
+-------------------------------------------------------------Other Task As QA -----------------------------------------------------------------------------------------------
+1. acl2019 lijiwei Entity-Relation Extraction as Multi-Turn QA 
+2. DST-QA  20190806  'Whats the state of the current dialog ？'
+3. 20190829 Ellipsis and Coreference Resolution as QA 省略、共指
+4. 20190824 lijiwei     NER as QA
+5. 20190917 Span-Based Joint Entity and Relation Extraction with Transformer Pre-training 
+6. 20180620 Multi-task Learning as QA : 分析 其他什么都可以使用 QA 来做； 
+
+
+---------------------------------------------------------- Multi-Choice QA --------------------------------------------------------------------------
+------------------------------------------------------------1.  会话(Conversations)MRC -------------------------------------------------------------------------------------------
+1. DREAM 
+2. 托福
+3. 谷歌ACL2019
+4. 护士-医患对话
+
+----------------------------------------------------------- 2. RECE --------------------------------------------------------------------------------------------------
+1. MMM
+2. DCMN
+3. OPN
+4. Reading Stargegies 
+5. ElimiNet
+6. SG-Net [RACE、SQuAD]
+
+-----------------------------------------------------------3. MultiRC-----------------------------------------------------------------------------------------
+1.
+2. 
+3. Repurposing Entailment QA [MultiRC、OpenBookQA ]   使用 NLI、句子蕴含 做 MRC; 
+4. Evidence Sentence Extraction for MRC 20190225 [MultiRC\DREAM\RACE Quasar-T\SearchQA]  训练一个 抽取证据的中间变量，然后test直接去做； 
+
+------------------------------------------------------------会话-history QA ---------------------------------------------------------------------------
+1. QuAC 20180828 
+2. CoQA 2018
+
+3. FlowDelta: 
+4. GraphFlow: 
+5. 处理历史误差积累： 直接使用单独句子； 
+6. SDNet: 
+7. FlowQA: 
+8. 第一名   训练技巧： 对抗训练+知识蒸馏
+
+
+
+
+
+神经机器阅读理解与机器推理： 
+MRC: 
+Reasoning: 
+
+#### De-Attention 可以更换很简单的版本，或者进行尝试； 
+
+是不是我们每一次做一个任务都需要进行在专门的语料库上面进行 再训练，这样学习到的 词向量的表达还有什么意义？ 
+怎样开创将 1-2-3 种 常识(结构信息、常识概念信息、常识时间信息)等等都可以学习的很好，或者可以通过很简单的 微调就可以达到很好的结果； 
+#### Bert的相关文章整理阅读
+1. Bert: 
+2. Elmo:
+3. GPT: 
+4. XLnet: 
+
+##### Bert 的变种
+5. 
+
+
+##### Bert 等变种的分析
+
+
+##### Bert 等变种的应用
+
+
+
+
+-----------------------------------Open Doamin MRC----------------------------------
+
+
+-----------------------------------Answer Selection---------------------------------
+
+
+
+
+
+
+
+
+###########   其他关注  
+1. Attention 的 各种变体 ： 
+    1.1 self-attention 
+    1.2 
+    1.3 De-Attention 
+    1.4 
+
+2. 
+
+### pytorch 
+{
+1. python argparse中action参数: https://blog.csdn.net/tsinghuahui/article/details/89279152 
+  default=True/False,如果调用则全部为 True，如果不调用，则为 Default,默认为False; 
+2. python 中的赋值、深拷贝、浅拷贝: https://www.cnblogs.com/huangbiquan/p/7795152.html  
+赋值: 内存相同,不会开辟新的内存空间，一个变另外一个变;   
+浅拷贝: 创建新对象,内容是原对象的引用，仅仅只是拷贝了一层； 三种形式: 切片操作,工厂函数,copy中的copy(); 
+深拷贝: 只有一种形式,copy模块中的deepcopy()函数; 拷贝出来的是一个全新的对象,与之前的对象没有任何关联; 拷贝了对象的所有元素,包括多层嵌套的元素;
+}
+
+
+
+
+
+### 文章:  
+Attentive History Selection for Conversational Question Answering: QuAC 
+{
+做法/贡献: 
+        1. 使用  positional history answer embedding method 建模会话的历史信息; [对于建模历史会话信息很重要]---- 
+        2. 设置  history attention meachnism(HAM) to conduct a 'soft selection'历史; ----- [之前无人研究过: learn to select or re-weight 会话历史turns]; 学习所有之前历史的turns的权重; 
+        3. 使用  MTL:将 answer prediction 和 dialog act prediction结合起来做多任务; 
+
+注意:  1. 可能历史不仅仅是指的当前问题的前2-3轮次，更远的信息对于现在的回答也有帮助;
+       2. CoQA-QuAC----Span prediction
+      3. 依然是： 历史选择、历史建模
+                历史选择: HAM
+                历史建模:前人都为考虑: position of a history utterance in the dialog;  -----提出: positional history answer embedding (PosHAE)
+
+QuAC: 数据集特点: 
+                1. 采样 50份passages,对应302份问题: 35.5% 表现为 topic shift ; 5.6% 表现为 topic return[之前已经结束的 topic 又进行讨论] ; 
+
+结果总结: 
+    1. 目前 QuAC榜单第一; 
+    2. 消融实验表明: 
+                2.1 History Attention 很重要;   
+                2.2 PosHAE 很重要; 
+                2.3 
+
+问题: 现在都是考虑 以前历史对于当前对话的影响，在收集数据集的时候有时候会加入自己的因素，可能后一个的答案，对于验证和回答之前的问题也是有很大的帮助; 
+      问题的收集过程都是看着文章的过程中进行的，作为 老师或者学生大概都会知道问了这个问题下一个问题需要问什么？  所以这种情形怎样进行建模，然后利用？ 
+        1.1 模型的利用？ 
+        1.2 数据集重新构建或者新建的利用？ 让学生对于文章没有任何的了解，这种才可以真正模仿人类通过连续的问问题形成最终的获取知识;
+    }
+
+An Empirical Study of Content Understanding in Conversational Question Answering : CoQA-QuAC [研究类，调研目前做  会话MRC的性能以及 存在的问题; ] 
+{
+出发点: 发现会话阅读理解中的两个最重要的问题并没有得到很好的解决:   多以设置；  different training settings, testing settings 去攻击模型对于 内容的理解;   结果: 存在潜在危险; 
+    1. 模型多大程度上反映了对于  内容或者问题的理解? 
+    2. 模型是否很好的利用了 会话的内容? 
+
+文章关注于: 
+    1. 模型在两个数据集上的效果是否反映了模型的理解?   效果好 ----- 不一定等于 模型做到了 对于任务的理解;
+        *  使用 不同的  training settings 去研究
+    2. 目前的模型是去取得好的效果是做到了 对于 内容的理解;    数据集的设置是  文章中的 span，所以不清楚模型是掌握了 对于文章中  answer的position的学习  还是真正学会了对于 文章内容的理解; 
+        * 使用 different testing settings 去研究
+调研模型: 
+    1. FlowQA
+    2. BERT
+    3. SDNet
+    4. 
+实验结果: 
+    1. CoQA-QuAC 上面好的结果并不能反应  模型对于内容有了一个很好的理解; 
+    2. QuAC上训练的模型对于 之前answer*s position 的重要程度远大于 对于文章内容的理解; 
+
+相关工作:   
+    1. MRC的调研; 
+        1.1 2017---jia 攻击 SQuAD模型;
+        1.2 2018 --- Lipton : 确定MRC需要的能力; 
+        1.3 2017--- 发现如果一个 单词在问题中出现很重要，那么对大问题就可以依据这种 超级的特征去回答问题；
+        1.4 2018 Rondeau --- 同上; 
+        1.5 but:  会话QA很少研究; 2019 --仅仅是比较 CoQA 和 SQuAD20. QuAC的定量，但是没有对 会话QA的方法研究;
+    2. 模型不适用 all useful features is common in deverse areas.
+        2.1 NLI--2019  很依赖于 lexical-leval features but little compositional semantics; 
+        2.2 Dialog Generation --2019 系统不需要了解整个 会话历史;
+        2.3 CV---
+        2.4 作者: positional informational rather than semantic information 被模型利用; 
+文章统计/数据集特征: 
+    1. previrous answer 与 当前的问题 Questions 之间单词之间的重合度分布:  CoQA 几乎百分之 50 以上都有 重合而且很多;  QuAC中大概稍微少一些，之前的 answer与当前的问题之间有重合词;
+    2. Answer format: 
+        2.1 QuAC:Span ; CoQA: 自由文本,但是倾向于span。   
+        2.2 QuAC的answer length 往往比 CoQA答案要长，QuAC各部分切合实际;
+        2.3 CoQA 中答案可以是 yes or no . 
+        2.4 CoQA中 evidence span 是提供的,所以之前的 answer*s position information 仍然和 QuAC直接可使用; 
+    3. 数据收集: 
+        3.1 QuAC: 数据收集中: 问问题的人看不见文章; CoQA:看得见; 
+
+模型分析: 
+    1. FlowQA: 主要是: Integration-Flow 机制: 对于每个问题Question得到一个 Question-aware context representation.   ; 然后使用 Flow将同一个单词不同问题之间的表示进行融合;    后面改进: 问题对于文章的表示也是随着问题的尽心那个更新而更新; 
+                缺点: 1. 太隐式; 2. 只关注与 问题，之前的  answer对于后面的影响也很大; 3. question-aware context reoresentation 是固定的并没有随着时间的进行而进行转换;
+
+    2. Bert: 
+    3. SDNet: 
+
+模型效果好 vs Content Comprehension 
+    1. QuAC: 61% 问题含有到文章的共指实体; 44% 共指到之前的历史。  11% 的问题询问 会话更多信息; 
+    2. CoQA: 49.7% 问题显示共指 到 会话， 19.8% 隐式; 
+    3. 问题与  conversation 的相关性很高，所以期望很好的理解 会话问题的问答;   为了实现这一研究: 假设: 如果模型在 不访问会话内容的情况下就不应该获得高性能;
+    4. 三种设置:
+        4.1 使用最初始的模型设置:
+        4.2 -context  去除先前问题以及问题的答案,但是保留答案在文章中的位置信息; [仅仅是位置信息,并不是文章中对应的答案的span，而且这种文章span文本的丢失造成的语音损失是不容易被其周围的语义所补偿的;]
+        4.3 - conversation: 去除任何历史;  但是文章完全保留; 
+
+        4.4 结果: CoQA-QuAC都是: -context的性能明显好于 -conversation:  表明:好的结果并不一定是  对于文章内容 content understanding; 
+            
+    
+Quetion: 模型理解了  会话内容了吗?
+    1. 上述证明答案位置的重要性; 但是完整的设置并不知道更好的性能是由于理解: 位置 和 内容造成的; 
+    2. Repeat Attack: 增加文中答案之间的距离;   将答案所在的句子进行多次重复,语义没有发生变化，对应的答案也应该不会发生变化; 
+                      # 前一个答案的位置有可能泄露当前答案的位置信息,因此模型可以将与前面答案相邻的句子作为候选; 
+                      # 如果模型是通过理解文章的内容来做回答问题，那应该对于重复攻击是健壮的; 
+
+        2.1  QuAC: FlowQA-Bert 对答案连续之间的距离很敏感; 重复攻击时: 性能下降很明显;   不使用前答案的位置信息的训练形况下,尽管比完整模型性能差很多，但是对于对抗好很多; 
+        2.2 答案位置与模型鲁棒性之间关系: 当前答案和先前答案在文章位置较近时，Bert-FlowQA都可以正确的预测出来;  当距离较近时:重复攻击更有效;  QuAC对于位置比contont敏感的多; 
+        2.3 对于 当前question 是否 flolow up 之前question的攻击: QuAC有注释;   QuAC中follow up 的严重依赖于先前问答位置信息,而不是 contont information; 
+        2.4 不攻击正确,攻击错误例子:  攻击下，FlowQA模型更容易选择下一个span作为答案;  Bert容易选择 非常不可信答案，或者  no ；  
+    3. Predict without Previous Answer Text:  可以用问题但不能用答案; 
+        3.1 模型对于历史答案的敏感度很高; 
+        3.2 很多模型在利用之前答案的时候同时利用了  answer的位置信息; 
+    4. Predict without Previrous Answer position 
+        4.1  CoQA上的 FlowQA很少利用 之前答案的位置信息; 
+    5. QuAC训练的模型高度依赖于 先前答案; 位置信息; 
+    
+总结: 
+    1. QuAC上的高性能并不能反应模型对于 会话内容的理解; 
+    2. QuAC上的模型不一定能学会会话理解;
+未来: 
+    1. 数据集收集:
+        1.1 问题应该更加现实，开放;   QuAC设置中: 如果文章中有3个无法回答的问题,会话就会终止，所以经常问一些保守的问题; 问的问题都可以回答，而且位置很接近;
+    2. 模型设置: 
+        2.1 模型应该设计的更加关注 语义理解; 
+        2.2 目前不清楚如何设计一个自然学习会话理解的模型，应该加强泛化性和鲁棒性; 
+    
+    
+}   
+20191015 未读文章 Answering Complex Open-domain Questions Through Iterative Query Generation
+{
+1. HotpotQA-full_wiki open-domain QA;  基本解近SOTA,在未用BERT的情况下; 
+2. 基本思想: Iterative Reasoning and Retrival 生成 Question;  
+3. 基本和之前的 CongQA与 decompQA相似: 不同: 1) CongQA: 生成问题时候不仅仅使用实体为中心，还使用了其他启发式重叠为基础的线索; 2) DecompQA: a: 都需要对 中间结果的监督，文章使用了启发式的方法得到的结果作为监督; b:迭代的进行，不像之前直接分解; 
+4. 借鉴: 第一步实体为中心的检索结果对于第二步的 文章support检索结果至关重要; Decomp就是没有使用这一点， recall对于2-hop的结果很重要; 
+}
+20190327 naacl2019  Understanding Dataset Design Choices for Multi-hop Reasoning  
+20191023 Introduction to Neural Network based Approaches for Question Answering over Knowledge Graphs
+
+
+
+#### 想法
+{
+1. Multi-hop 这种做法很多就是没有用到多跳的做法,那么为了刷最终的榜单是不是可以利用目总结出来的更多的关于模型的问题提升效果; 
+   比如: 对于 HotpotQA而言可能目前最重要的: 讲问题的句子进行 句法分析,分析回答这个问题模型所需要的技能(或者使用数据扩充、或者只用关键词)
+   对于评价而言，support的学习模式说不定也可以直接被学习出来，并不是真正的多跳这种，就像  RC-RQD这种做法; 可以直接使用人工评价的指标来评价最终生成的结果; 
+2. 不管对于哪个MRC任务加入生成的模式最后的结果会不会好一点; 
+3. multi-hop中标注的support文档质量不高，很多可以直接使用 single-hop直接去完成; 关键之处在于怎么定位相关的文档; 
+4. hotpot中文档的标题有时候是共指的对象,比如: 姚明    他是火箭队NBA的球员; 
+5. 对于hard虽然数据集没有明确的划分出来，但是似乎好像所有的 comparison类型的问题都是 hard ; 
+6. comparison类型的问题好像都是明确说明了两个需要进行比较的属性所在的实体或者对应的段落。干扰段落基本没有影响; 
+7. 对于问题解析的演化: 
+    7.1 DecompQA: 问题的拆分与重组  对于问题算是最显式的更新;   但是太粗暴, 1.问题分解需要标注;  2. 误差传递;  3.各种各样的问题不可能完全囊括;  其实算是已经做的很好了，每一个问题分解为几种不同类型的子问题,然后分别求到答案,再对答案进行重排序或者选择; 
+    7.2 DFGN: 每一步对问题取 meanpool, 然后每一步计算完了对于问题进行向量反向传播更新，算是最隐式的更新;   1. 过于隐式，meanpool更新的很小，而且对于多跳基本不敏感； 
+    7.3 CognQA: 算是一种贪婪的对于问题进行分解的方法,没有显式的对于问题进行建模,只是使用实体动态的更新 认知图  1.对于问题的利用仅限于实体,其实问题中很多信息可以使用;  2.仅仅是对于一个实体出发，然后探索，完善认知图; 没有利用多头的搜索，以及搜索过程中的动态感知、交互等等; 
+    7.4 曼宁组 GoldEn(Gold Entity) Retriever: 最开始直接初始化为空的生成问题，然后利用生成模型，使用生成的 问题+原始的问题进一步生成下一步的问题，因为hop设置为2,所以
+        基本上就是检索出 第一个hop相关的对于 第二个hop有用的 miss entity ，然后进一步进行直接使用。 一方面利用了文本整体的信息，另一方面使用自己设置的训练方式将第一步的结果
+        考虑到了第二步问题生成的过程中; 但是 1. 第一步生成监督这个肯定有用,pipline模型的影响; 2.还是没有显示的对于问题进行使用,仅仅是使用 问题作为 一部分输入 去生成中间问题; 
+        3. 上面模型搜索时候都有的冷启动的问题,这个可以被很明确的作为数据分布学习到吗？ 针对每种类型的问题都可以直接知道第一步应该查找什么实体吗? 
+
+    7.5 总结: 上面模型看着是 multi-hop，其实是对于 question的不同的处理方式不同;如果有更好的对于问题的处理方式,可以检索到相应的段落，效果应该会好些; 
+8. 从问题出发，构建 完形填空对于问题数据进行增强;  把第一hop的答案直接寻找出来;  直接训练什么是第一hop。什么是第二hop的答案  和 问题; 
+9. 尝试对于  问题进行 语义解析 或者 成分分析 之类的做法, 或者直接利用   命名实体 去文章中构建相应的知识图，然后再在上面进行推理; 
+    怎样将问题multi-hop和single-hop的唯一区别就是 问题的设置变了,怎样将多跳 和 单跳进行融合; 
+10. 加强对于问题的进一步分析，看看怎样对于问题更好的进行表示，从而可以更准确的进行搜索; 
+    10.1 在现在公开的模型上面看 文章中的结果  以及自己进行测试，看看对于 bridge 和 comparison 两种类型的问题的性能进行比较; 
+    10.2 进一步手工，人工的看看这些问题中的规律，怎样进一步促进问题的研究; 
+11. 问题中的 entity 很可能 和文章中的  span 对不上，比如 人名的缩写，机构名的引号等等;   NER结果以及实体消歧等等; 
+12. 很多比较类型的问题: 比如: 姚明 和 易建联 的职业是什么? 很可能只用一个信息就可以找到答案，怎样将  一个的答案 启发式的传播给另一个线索，而不是顺序的进行搜索等等;
+
+13. 对于hotpotQA_train_question的分析： 
+    13.1 问题类型: bridge: 72991   comparison: 17456 (19.3%) 
+    13.2 现象1:  answer matching question : bridge类型中未出现;  comparison: 6527 [差不多占 conparison1/3]; 
+    13.2 现象2:  comparison 类型问题中分析: 
+        A: question中出现 'or  and '[也就是答案很容易选择范围]: 17146 
+        B: answer 为 yes_no : 5481; [1/3]
+        C: answer matching question: 6527 [1/3] 直接是question的选择; 
+        D: 除过 B-C即,answer 不是 yes_no, 也不是 matching_question 剩下的部分: 'or-and ' 5323 [1/3];   问题: which:1402;  who: 830; what: 2322;  where:73; 
+        总结: comparison问题类型: a) 很容易定位证据support doc级别;  2) 2/3 的answer 是 yes_no 或者 matching_question,剩余的问题中其中大部分也是 matching_question只是 NER级别存在对不齐; 
+14. 对于 hotpotQA_train_question中bridge-entity类型问题的分析: 
+    14.1 文章中分为3类差不多可以合并为2类: 1) [40%] bridge—entity作为 miss_entity ,只有尽可能得到 1-hop的实体或者属性之后，才可以进行 2-hop 的推理;  如: 2015钻石MVP的球队是什么?  2015钻石MVP --> A --> 球队;
+                                        2) [30%] bridge-entity作为 中间实体,找到满足不同属性的条件的实体; 如: 哪位皮库兹堡的前成员被叫做'眼镜蛇'?  皮库兹堡前成员<--A--> 眼镜蛇  
+        
+15. hotpotQA的四种模式: *answer
+    15.1   1 <-- A* --> 2
+    15.2   1 --> A --> 2*
+    15.3       A---B
+                 |
+                 |
+           选择A | 选择B 
+    15.4   Yes   | No     
+16.hotpotQA如果使用support doc的上限是多少? 目前的模型是第一阶段没有做好，还是第二阶段做的不好; 
+
+    }   
+{
+ 1. wikihopQA中存在大量的  NER: 1) 共指;  2) 共现; 等现象
+ 2. 相较于 hotpotQA : 1) 问题来源于 KB形式,比较简短,包含的信息也比较多,也比较有限;   2) 推理形式可能少一些,multi-hop 最多的是: A--> B -->C
+                      3) 有候选答案,   
+17. 异构的GCN直接用到 MRC的好像不多, 其中文章、句子、实体等不同级别对应于不同的 node,融合方面可能会带来大量的节点，应该选择有用的，而无用的应该直接排除;  以及怎么模仿动态决策的事情; 动态GCN
+
+}
+
+
+#### 模型-代码
+{
+HotpotQA:
+    Distractor_v1:
+        1. DFGN--头条acl2019: 开源;   dev-distractor_v1;  [16th]  
+            1.1 NER 
+            1.2 Paragraph_Selection
+            1.3 DFGN: 
+                * data 
+                * model : 
+                    * GFN.py  定义了GraphFusionNet()
+                    * layers.py 定义了实现GraphFusionNet() 各个层的函数; 
+                * tools: 数据处理
+                    * data_helper.py
+                    * data_iterator_pack.py
+                * pytorch_pretrained_bert 
+                    * pretrained_bert.py
+                * config.py  模型所有的参数
+                * create_graph.py
+                * train.py 
+                * utils.py 
+                * text_to_tok_pack.py
+                * predict.py
+                * hotpot_eval.py
+        2. QFE--- [ACL2019] [17th]
+        3. DecompRC--- [acl2018] [未评价 support/joint]
+    Full_wiki_v1: 
+        1. SemanticRetrievalMRS ----[emnlp2019][5th]
+        2. Cognitive Graph QA ----[acl2019][9th]
+        3. MUPPET ---[acl2019] [10th]
+        4. QFE--
+        5. DecompRC--
+        6. MultiQA
+
+WikihopQA: 
+    1. BAG
+    2. 
+    
+
+}
+
+### 数据集
+{
+1. 姚明和他老婆的身高差多少?   
+    1.1 姚明身高:
+    1.2 姚明老婆: [], ---> 身高:
+    1.3 比较
+2. 从2016年的体检系数来看姚明的身体素质怎么样？
+    1.1 2016 体检系数: 身高/体重; 
+    1.2 姚明身高:
+    1.3 姚明体重: 
+3. 
+}
+{
+1. 中国英语4-6级; 
+2. 中国考研: 
+3. 所有MRC进行归一化为[选择题,并且给出答案的推理原因;文章的句子,以及推理类型;]
+    3.1 完形填空---选择题:[]
+    3.2 正常阅读理解--每一篇*4*5 
+    3.3 句子段落大意---选择题;  文章第三段主要讲了什么? 候选数量*8 ABCDEFG
+    3.4 句子重排序---选择题; 
+    3.5 30年 * [2*2+1] 次 * [4*5+10+8]      
+}
+{
+CosMos[CommonSense Machine Comprehension] QA:    |   https://arxiv.org/pdf/1909.00277.pdf   | https://wilburone.github.io/cosmos/ 
+1. 来源: NarrativesQA[来源于个人博客dataset]中关于 日常生活的个人叙事;     类型: 叙事;  
+2. 35600 problems 需要常识的问题;   多项选择题类型,不是原文span;   21886种取自别人的博客的语境：  93.8% 问题需要 Commonsense Reasoning
+3. 与一般MRC数据集最大的不同: 1) 以前都是对于文章中的事实以及字面意思的理解; 2)Cosmos是对于 人们各种日常生活叙事的描述;  需要从文章中的片段进行推理; -- 日常生活逻辑的推理; 
+   * 需要识别文章中没有提到的，或者 日常生活中 隐含的  知识、意思;   需要 reasoning about the causes and effects of events, the likely facts; 
+4. 比如: A需要人照顾; 1)不是孩子2)沮丧  --> 残疾人; 
+5. 特点: 1) 需要常识在文中进行推理;    2) 回答问题必须借助于 文章-上下文; 
+6. 收集: 1) 每一段众包提两个问题,四种分类: [1.Causes of events; 2.Effects of events; 3. 4. ] 涵盖9中 Social CommonSense,对齐19种ConceptNet[的67.8%] relations;  
+                * [A event 原因/非] Causes of events: What may (or may not) be the plausible reason for an event?
+                * [A event 发生/非 前/后/中 的影响]Effects of events: What may (or may not) happen before (or after, or during) an event?.
+                * [A event 发生的事实]Facts about entities: What may (or may not) be a plausible fact about someone or something?
+                * [A event 反事件]Counterfactuals: What may (or may not) happen if an event happens (or did not happen)? 
+
+        2) 质量检查:[1Paragraph-1question-1correct_answer-3incorrect_answers] [1.段落合适 2.问题合理性 3.答案是否正确 4.答案是否 需要常识知识  5.答案是否 要看段落]  33219 question
+        3) 不可回答问题[2369]: 2/3众包答对，但是 没用常识,将正确答案替换为 None of the above; 
+        4) False Negative training instances: 33219*70%问题,将answer中最不具挑战的答案替换为'None of the above'； 
+7.数据集划分: 35588questions: 7K-test/3k-dev[质量高的][会不会带来 train-dev-test分布不一致]
+8. 数据集分析: 
+    8.1 vs.SQuAD: 问题开头多以 'why','what may happen','what will happen'
+    8.2 问题类型[关于event的什么?]分布:
+        * no-need commensense: 6.2%
+        * Pre-/post-conditions[27.2]: causes/effects of an event. [先验/后验条件: 事件原因/影响]
+        * Motivations[16.0%]: intents or purposes [动机:目的]
+        * Reactions[13.2%]: possible reactions of people or objects to an event [人/物 对于事件的反应]
+        * Temporal events[12.4%]: what events might happen before or after the current event [时序事件:事件之前/之后会发生什么事件]
+        * Situational facts[23.8%]: facts that can be inferred from the description of a particular situation [从当前事件描述可以得到的事实]
+        * Counterfactuals[4.4%]: what might happen given a counterfactual condition [反事实: 反事实条件下可能发生的事件]
+        * Other[12.6%]: other types, e.g., cultural norms [其他常识: 文化规范等]
+
+9.BaseLine--Bert FineTune Multiway Bi-Attention: 
+    9.1 Bert_Encoding : [H_cls,H_p,H_q,H_a]
+    9.2 Multiway Attention: 分别对于 Q-P-A : 计算 Multi-way attention; 
+    9.3 fuse_multi-way 
+    9.4 fuse_P-Q-A
+    9.5 Softmax
+    9.6 othwe MRC Model
+10.Results & Analysis 
+    10.1 大多数MRC 模型都倾向于捕获 P-Q-A之间的相关性; 而数据集需要推理,模型基本没有任何常识推理; 
+    10.2 83%以上的正确答案没有在给定的段落中,所以传统模型效果很差,但是 预训练模型微调可以很好的工作;  提高 20%;
+    10.3 Multi-way attention有一定作用; 
+    10.4 
+11. 消融实验: 
+    11.1 [(A|P): 去除问题]简化问题性能下降不多; 
+    11.2 [(A|Q):去除文章] 性能下降很多: 真的很依赖于  文章上下文; 比如:接下来发生什么? 之前发生了什么?
+12. Knowledge Transfer Through Fine-tuning: [近似任务上进行 transfer]
+    12.1 RACE,SWAG[常识推理数据集]
+    12.2 在 SWAG进行微调,然后再在 CosMos上进行微调,结果最好; 
+13. 错误分析:  100 errors 分成 4种现象: 
+    13.1 Complex Context Understanding[30%]:  context 需要 复杂的 跨句子 解释和推理;  [女子曾经自杀,但是失败了,她整理床铺--> 决定离开;  乘坐电梯前往屋顶--> 打算再次自杀]
+    13.2 与人类的常识不符[33%]: 模型选择了 不符合人类常识的选项; 
+    13.3 Multi-turn 常识推理[19%]: 比如: 1.<头痛,原因,与朋友聊天忘记睡觉>;  2. 反事实推理: <不与同学聊天,不会导致,头痛>
+    13.4 Unanswerable Questions[14%] : 模型不能正确的处理'None of the above', 因为不能直接从文章中得到. 相反: 模型需要判断所有选项的能力; 
+14. 相关工作: 
+    14.1 与 ReCoRD数据集比较: 完善了ReCoRD三个挑战: 
+                        1) 数据来源于 网络博客,而不是 新闻,因此 需要对 日常事件的常识推理,而不是有新闻价值的事件; 
+                        2) 不是span,不是entity fron context;  83%答案没有在文章中提及; 
+                        3) CosMos可以用于生成评价; 
+    14.2 CommonsenseQA等: 和MRC结合; 
+15. 总结: 
+    15.1 文章提出数据集: CosMos: MRC-上下文常识推理; 
+    15.2 文章baseline:  Multi-way Attention for Bert
+    
+16. 针对不可回答的问题模型是怎样解决的，如果单独处理每个选项，那 None above all 怎么进行确定，是不是也可以进行类似于  RACE之类方法的借鉴。   
+}    
+
+
+{
+TWEETQA: A Social Media Focused Question Answering Dataset | https://arxiv.org/pdf/1907.06292.pdf | https://tweetqa.github.io/
+TweetQA: Social Media 
+1. 来源: tweets used by journalists to write news articles; [保证有有用-相关的信息] [使用 记者用来写新闻文章的tweets]
+2. 形式: abstractive []   |  动机: 理解 用户生成-有噪音的 social media text 重要;  | 众包 | 事件相关 |  
+3. 难点: 
+    3.1 informal nature of oral-style texts [口语题文本的非正式性]infering the answer from multiple short sentences, 如 so young  
+    3.2 tweet-specific expressions  [推特数据自己的特性]  [A 对 B 的死感到悲伤,因为 他发了这条推文]
+4.相关工作: 
+    4.1 Tweet NLP [可以作为特征使用之前的模型直接拿过来用]: 1) Tweet POS;  2) Tweet NER; 3) Tweet Dependency Parser  
+    4.2 MRC work： 现有的工作都来自于 维基百科、新闻文章 或  小说故事,这些都被认为是 正式语言。    
+5. TweetQA
+    5.1 Data Collection:  
+        1) Tweet Crawling: i) 选择编辑新闻使用的tweet  2) tweet去噪,如带有 照片、视频、音频    3) sota SRL去分析 谓词-引语 结构，只保留 arguments   4) 过滤过短的tweet
+        2) Question-Answer Writing: 众包 | 每个工人 看3个tweet并为每个tweet写2个问答对。   
+            * 对于工人引导:   [过滤琐碎问题，可以通过表面文本匹配，或者需要背景知识的挑战性问题]      i) NO yes-no question   ii) question长度 > 5；  iii) link、video、image去除   iiii) 回答问题不需要背景知识
+
+    5.2 Task and Evaluation 
+
+    5.3 annlysis
+
+} 
+
+20191031 常识推理综述  |   Commonsense Reasoning for Natural Language Understanding: A Survey of Benchmarks, Resources, and Approaches  | https://arxiv.org/pdf/1904.01172.pdf 
+{
+1. 常识知识、常识推理。 本文旨在概述现有的  任务、基准[benchmarks and tasks]、知识资源[knowledge resources]、学习&推理方法[learning and
+    inference approaches]  
+
+2. Benchmarks and Tasks:    1) 介绍基准  2) 基准构建的考虑、出发点  3)基准构建的教训、总结
+    2.1 Overview of Existing Benchmarks  [1.共指消解  2.QA 、 3.文本蕴含  4.似然推理  5.心理推理  6.多重任务] | 不排外
+        2.1.1 Coreference Resolution 
+            * WSC(Winograd Schema Challenge): 回答一个问题，系统必须消除一个代词的歧义，这个代词是两个实体中的一个。
+            * Otrher Coreference Resolution tasks:   
+                * bAbI(2016)
+        2.1.2 Question Answer : 确定代词在文本中所指的实体或事件。  难点:1. 一个代词在句子中存在多个实体需要 消歧，需要常识帮助推理。  2.数据偏差影响: 性别偏差 ，王文 大多指女。    
+        科学* ARC(2018-AI2): 8000 4-choices 科学问题、答案。  1400W 科学句子相关的语料库，这些句子包含了回答问题所需的大部分信息。 | 很多问题回答需要从语料库中的多个句子提取信息才能正确回答，不能简单搜关键字回答。  |  鼓励对于知识的高级推理。 |  http://data.allenai.org/arc/
+            * MCScript(2018): 14000个基于短文的双向选择题，很大部分需要纯常识回答，没有passage很难回答。  |  已标注是否需要 提供文本、外部常识回答。 |  http://www.sfb1102.uni-saarland.de/?page_id=2582
+            * ProPara(2018): 488 annotated paragraphs of procedural text. 描述了各种科学过程，如:光合作用、水力发电，系统要学 过程中对象状态的变化。  |  理解状态变化需要世界常识。 |  段落中每个句子中的  每个实体需回答这个实体是否: 被创建、销毁、移动。 | http:
+            //data.allenai.org/propara/  
+            * MultiRC(2018): 10000问题，涉及多领域8000段落。  难点: 1) 答案跨段  2)答案数量不定  |  http://cogcomp.org/multirc/.
+            * SQuAD2.0(2018):  10W可回答+5W不可回答。   推理:判断问题是否可回答需要外部知识、一些高级推理。  |  http://rajpurkar.github.io/SQuADexplorer/.
+            * CoQA(2018): 1) 有需要常识推理的问题   2) out domain 问题  3) 无法回答问题
+            * OpenBookQA(2018): 6000 4-way 选择题， 需要科学事实、常识  |   不提供任何外部知识资源。 | http://github.com/allenai/OpenBookQA.
+            * CommonSenseQA(2019): 9500 3+2-way 选择题。   常识：每个问题都来自于 Concept中三个相连的概念，需要消除三个的歧义。      
+        2.1.3 Textual Entailment [文本蕴含RTE]  | 文本与假设方向问题; |  矛盾认识
+            * RTE Challenges ：  1) 文本-假设 0-1分类   2) 3向决策：文本-矛盾    3)一个假设，+ 几个可能句子     4) 分类   |  http://tac.nist.gov/.
+            * SCIK(2014): 1) 句子关联任务  2)句子隐含任务  
+            * SNLI(2015): 60W句子对，3向决策     (2017)5向决策 
+            * SciTail(2018): 27000 从科学问题改编而来的  前提-假设(premise-hypothesis)对组成，双向包含任务  2分类:  0-1 |  http://data.allenai.org/scitail/
+        2.1.4 Plausible Inference : 似是而非推理  | 关注于 日常事件，包含 各种实际的常识关系，日常互动的常识。  活动、烹饪等。
+            * COPA(2011)
+            * CBT(2015): Children*s Book Test.  完形填空 从给定10个候选单词，四种类型: 命名实体、普通名词、动词、命题
+[有心理推理] * ROCStories(2016): 50 000个 五句日常生活故事的语料库，其中包含大量事件之间的因果和时序关系。  50000故事中 3700用来测试，其中包含 一个可信、一个不可信的故事结尾。   故事完形填空。     领域来源: 日常故事 
+            * joci(2016): Ordical CommonSense Inference :  39000 sentence-pairs,context-hypothesis.   1-5打分，  
+            * CLOTH(2017): 10W 初中、高中 4-way 选择填空问题。  4种类型: 语法、短期推理、匹配/释义、长期推理。    
+            * SWAG(2018): 11.3W个 短文本开头，系统在 4个结尾中选择一个可能的。   |   http://rowanzellers.com/swag/
+            * ReCoRD(2018): 常识推理、类似SQuAD、大多未新闻文章、完形填空格式。  NER在数据中被标识、并用于填充 完形填空任务的空白。   12W示例，大多数需推理。  |  https://sheng-z.github.io/ReCoRDexplorer/.
+
+        2.1.5 Psychological Reasoning:  心理活动等推理   
+            * Triangle-COPA(三角-COPA): 100例子
+            * Story Commonsense(2018): 160 000条 关于ROCStories中人物的动机和情感的注释。   除了动机、情感，另外三个分类任务: 1) 推断基本人类需求  2)推断人类动机  3)推断人类情感  |   http://uwnlp.github.io/storycommonsense/
+            * Event2Mind(2018): 意图 、 反应。  2.5W独立事件的 意见、反应 注释，数据来源于: ROCStories.  1) 预测参与者的 意图、反应   3)预测其他人的反应  
+        2.1.6 Multiple Tasks: 几种能力结合
+            * bAbI(2016):  RE 、 Coreference Resolution 
+            * Inference is Everything(IIE):  SRL、CR、 Paraphrase.   |  还有常识推理: 演绎归纳、时间、位置、大小
+            * GLUE： 100W示例、来源于很多数据集
+            * DNC(2018): 9个文本蕴含任务，需要7种不同推理类型： 1) 时间真实性  2) NER  3) 性别回指解析  4)辞汇合成推断  5) 比喻性语言  6)RE   7) 主观性
+
+      
+
+3. Knowledge Resources: 据统计，正常人到成年已经积累 数百万 不同的常识公理。 |  外部知识: 命题、分类、本体、语义网络
+    3.1 Overview of Knowledge Resources for NLU 
+        3.1.1 Linguistic Knowledge Resources[语言资源]： 语言资源: 语法、语义、话语结构的注释。  尤其是 词汇语义知识库。  
+            * Annotated linguistic corpora[带注释语言数据集]: 
+                * Penn Treebank(1993)： 及其衍生物。 POS标签、syntactic structures based on context-free grammar(基于上下文无关语法的句法结构)  注释
+                * PropBank(2002)： 华尔街日报 进行扩充， 提供了 predicate-argument structures.  
+                * PDTB(2004): 上述两者之上，增加了 discourse structures. 
+                * OneNote(2007): Penn TreeBank、PropBank将其与  词义、本体等链接。  
+                # AMR(2013):将 PropBank扩展为句子级语义形式主义。  
+            * Lexical resources[词汇资源]: 
+                * WordNet(1995): 根据概念组织单词。  使用 单词之间的语义关系[反义词、下义词、内义词, antonymy, hyponymy/hypernymy, entailment,]
+                * VerbNet(2005)：根据英语动词、及其变体组织。  280动词类，每个类 由 argument structures，selectional retrictions on argument，语法描述来组成。   
+                * FrameNet(2002):提供一组动词的框架语义数据库。  ？？？
+        3.1.2 Common Knowledge Resources ：Common Knowledge： 世界的具体事实，如: 非典是一种病。   
+            * YAGO(Yet Another Great Ontology):本体库。         YAGO2:980W 实体 以及关于 实体的 4.46亿个事实。    YAGO3: 100W实体 from non-english wikipedia articles
+            * DBpedia(2007): 多国的结构化知识组成，195W维基百科文章。  1.03亿RDF三元组<主题，谓词，对象>，  
+            * WikiTaxonomy(2007):105 000 良好评估过的 的 维基百科文章类别建的语义链接。  类别、关系使用 由类别组成的概念网络的连接性来标记。  |   可以用于 计算 词汇的语义相似度，NLI和文本蕴含中有效果。 
+            * Freebase(2008): 1.25亿RDF三元组，4000实体，7000实体属性。   最后用于构建谷歌知识图谱。   
+动态知识、自动挖掘 * NELL(2010): 人类知识是动态的，最初24.2W实体到现在 5000W信念，其中300W有很高的可信度。      |   http://rtw.ml.cmu.edu/rtw/
+            * Probase(2011)： 不同于常识分类法，因为关系是概率性的，而不是具体的。 从 16亿网页中提取出 270W个概念。 概念之间的关系
+                在 2080W个 is-a 和 is-instance-of对中进行了描述。并且为知识库中每一对概念提供了 0-1 之间的 相似性值，可以进行概率解释。 
+                基于probase构建的 Microsoft Concept Graph延续。  
+        3.1.3 CommonSense Knowledge Resources  |  常识对大多数人来说是显而易见的，但是不太可能被表述出来。   CommonSense 包含 Common
+            * Cyc(1989): 含有700W常识性断言。  也有将 其与： 1) wikipedia 2)DBpedia 3)FreeBase 链接起来。  
+            * ConceptNet(2004): 5.5 : 800W 节点， 2100W 链接，并增加 1) Cyc  2)DBpedia.  |   http://conceptnet.io/. 
+            * AnalogySpace(2008): 类推空间
+            * SenticNet(2010): 1) 知识库是用来进行情绪分析的。   2)可以用在对情绪进行推理的常识推理任务
+            * IsaCore(2011): 情绪分析资源;    Probase +  Concept 
+            * COGBASE(2014): 270W概念，1000W关于概念的facts.  是 SenticNet的核心。  可以进行情绪分析； 
+            * WebChild(2014): 一般  名-形容词 关系的常识,78000不同的名词，5600个不同的形容词，之间有 460W个断言(捕获  名词、形容词之间的细微关系)，由常识组成。  WebChild2.0 : 200万概念、活动，1800万断言。  
+            * LocatedNear(2018): 常识: 现实生活中两个互相靠近的物体，如 盘子和玻璃杯 经常放在一起。  2个数据集: 1) 5000个句子组成，描述两个物体的场景，标记出两个物体是否倾向于彼此出现，作为常识；  2) 500对物体组成，放在一起的。     
+            * ATOMIC(2018):30万接待你对应于 时间的简短文本描述，87万 if-then 三元组日常事件之间的if-then关系。   简单的常识事件推理技巧。   
+
+4. Learning and Inference Approaches
+    4.1 Symbolic and Statistical Approaches: 1.有用，但是难伸缩。    2.使用很多语言特性： 语义依赖、释义、同义词、反义词、上下位等。    
+    4.2 Neural Approaches
+        4.2.1 Memory Augmentation: 有的需要 理解段落与几个状态改变或支持的事实。  bAbI-CBT-Propara.  随着时间的变化中间的状态可能会发生变化。  
+            * Memory Networks：  组件: 1) memory array、input feature map、a generalization module which updates the memory array given 、an output feature map、an output feature mamp、a respponse nodule which convert output to the appropriate response or action. 
+                * 记忆网络在 预测缺失的命名实体 和 常见名词方面优于RNN，因为记忆网络有更广泛的上下文来进行推断。  
+            * Recurrent entity networks(2017)  [EntNet]
+                *  由多个动态记忆单元组成，每个单元学习表示输入中提到的实体 的 状态、属性。   每个单元都是一个封闭的RNN,只有在接受与特定实体相关的信息时才更新其内容。    |  单元之间可以并行，允许同时更新多个 内存位置。  
+                * EntNet 在读取文本时候 维护和更新世界的状态，而内存网络只能在处理整个支持文本和问题 并将其加在到内存时进行推理。   例如: 给定一个包含多个问题的支持文本，EntNet：不需要多次处理输入文本来回答这些问题，而内存网络需要为每个问题重新处理整个输入。
+                * 缺点：虽然维护实体的内存，但是没有随时间对实体的各个状态进行单独的嵌入，没有显示的更新内存中的  共指，这会导致含有很多 coreference 的文本时候出现错误。  
+            * KG-MRC
+                * ICLR2019[Das]-Building Dynamic Knowledge Graphs from Text using Machine Reading Comprehension
+                    {
+                    1. 维护了类似于 内存网络的动态内存，然而这种集以是以 处理文本之后生成的知识图的形式，利用了信息抽取领域的研究成果。 
+                    2. 生成的知识是 二部图，将段落中的实体与其位置连接起来(目前，只捕获位置关系)。 实体和位置 之间的连接 被更新，以后在每句话之后生成一个新的图。                         
+                    }
+        4.2.2 Attention Mechanism 
+            * Attention in RNN/CNN
+            * Self-attention in transformers
+        4.2.3 Pre-Trained Models and Representations 
+            * ELMO
+            * bert
+            * gpt
+        4.2.4 Fine-Tune state add KG 
+            * k-BERT
+            * 下游任务 加注意力约束，使用句法分析。
+        4.2.5 KG-Pretrained Bert 
+    4.3 Incorporating External Knowledge :  尽管很多任务需要外部常识，但很少真正用外部常识的模型。   用处创建基础任务，但是没有用来解决基础任务。 
+        * ConceptNet 和  Cyc是最流行的，但是Cyc几乎没有人使用，conceptnet偶尔被使用:  1)OpenBookQA
+        * 2018[] COPA里利用
+        
+        
+
+
+1. 相关的KB有哪些？  哪些可以用？ 
+2. 怎么用？
+    2.1 检索
+    2.2 add KG 
+        2.2.1 加什么？ 
+            * 子图
+            * entity-relation embeddings
+            * 和 embedding无关
+        2.2.2 怎样加？ 
+            * K-Bert把三元组拿过来，非embedding
+            * embedding i) embedding从哪里来？  ii) embedding 融合方式
+                * attention 机制
+                * memory 机制
+                * entity-state 机制
+
+    2.1 KG Embedding + 检索到 + 维度拼接/embedding相加
+    2.2 
+
+
+
+
+}
+
+20191031 事件常识-资源  |   ATOMIC: An Atlas of Machine Commonsense for If-Then Reasoning |  https://homes.cs.washington.edu/~msap/atomic/data/sap2019atomic.pdf  
+{
+1.AtoMic: an atlas of everyday[day-to-day] commonsense reasoning, organized through 877k textual descriptions of inferential knowledge. [日常生活常识推理数据集，877K文本化的描述]
+2.与现有KB_资源比较: 传统都是基于分类学知识,atomic侧重: 使用变量将 推理知识 组织为： if-then relations. [if A 表扬 B, then B 很可能会也表扬 A]
+3.提出9中 if-then关系类型来 区别  1) 原因 vs. 结果 [causes vs. effects]  2)动因 与 主题 [agents vs. themes] 3)自愿 与 非自愿事件 [voluntary vs. involuntary events]
+                                4) 行为 与 心理状态 [actions vs. mental states].  
+4. 结论: 1) 通过在 atomic中描述的丰富推理知识的训练，神经网络可以 获得简单的常识能力 和 未见事件的推理 能力; 
+        2)  融合 if-then 关系类型层次结构模型 远 好于 单模型; 
+
+
+5. 人的推理: 通过观察到的事情,人可以很容易的实现 预测和推理 没看见的 原因和结果[causes and effects]: 1)之前发生了什么？ 2)接下来会发生什么？ 3)不同的事件是如何通过 因果 联系起来的？  
+    例子: 观察到‘X 击退 Y的攻击’，可以推断很多似是而非的事实。[Causes for X]  1)事件动机角度: A: X想保护自己; B: X想保护别人;  2) 事件发生的先决条件角度: A: X接受自卫训练;  
+                                                        [Attributes of X] 3) 从X属性特征角度: A: X很强壮、勇敢。  
+                                                        [Effects on X]:   4) X感受: A:愤怒-报案 B: 害怕被抓-逃跑；   5) effects on X: A:心脏病发作； B:多了一个敌人
+                                                        [Effects on Y]:   
+
+6. Goal: 规模大、覆盖范围广、质量好的知识库;   ----> 收集方式:  众包；
+
+
+7. if-then reasoning types 分类: 1) 根据预测内容: 1) if-Event-then-Mental-State     2)if-Event-then-Event  3) if-Event-then-Persona 
+                                2) 根据因果关系   1) stative   2) effects   3) cause
+8. 针对不同的事件可能根据预测内容分类中 3大类下面对应的具体9种划分不相同:          
+ 1)if-Event-then-Mental-State: 定义了 [3] 种 与 事件前后心理状态相关的关系: 给定一个事件[X夸赞B],推理3种类型: 
+                             A: intents of event [X想要友善]
+                             B: likely (emotional)reactions of the event*s subject [X感觉很好]
+                             C:likely(emotioal)reactions of others[B感觉好]
+ 2) if-Event-then-Event: 定义了 [5] 种 事件相关的关系，构成事件可能的 先决条件，影响等; 之前<---事件--->之后; [X煮咖啡给Y]
+                             A: pre-conditions:  X 有咖啡
+                             B: post-conditions[接下来可能发生的事件]: i) 自愿 [加奶糖]  ii)非自愿 [X得到Y的感谢]
+                             C: (implied) participants events[接下来可能发生的事件] : i)   ii)
+
+ 3) if-Event-then-Persona:  定义了 [1] 种静态关系来描述事件的主体是 如何 被描述 或 感知的: [X 报警]  X 被视作 合法 或者 负责
+ 
+ 4)层次组织: 也可以按照 1) 原因 2)结果 3)静态    每一个可以进一步划分为: agent 或者  theme of the event。 
+                    注: 省略不太可能导致预期的常识。 如: 通常只有 agent 导致event，而不是 theme。 
+
+
+### 数据收集-构造
+9. 基础事件 [base events]
+9.1 来源: 故事、书籍、网站、词典等。   故事、博客： 频率出现 5/100的阈值。  谷歌网站:前10000 个事件
+9.2 事件定义: 动词谓词及其论据的动词短语('drinks dark roast in the morning')。    如果 动词的 宾语不常出现，则用占位符代替('drinks __ in the morning')
+             为了更好��示事件的一般性，使用 person变量(personA 买 personB咖啡)。  未来: 用更多的变量，比如: personA moves to CityB
+    对于 显式涉及多人的事件，使用一个简短的 注释任务 来帮助解析短语中的 共指链，消歧很重要，可以改变事件意义。 如:'personA 打断 personB 的手臂','personA打断手臂'意义不同。                  
+10. 众包 
+10.1 要求众包者对于特定事件 写 自由形式的文本注释。  
+10.2 定义了4个任务对于众包者,用于收集常识性解释:   [这一段不是很懂]
+    给定一个基础事件[Event:PersonX pays PersonY a compliment],然后4个维度分别 最多要求3个众包者为一个事件提供 4个可能的解释。 
+    例如: if PersonA喝咖啡,then PersonA需要买咖啡 或者 需要煮咖啡。  这两个是不同的，但是是相似的。 
+    其中 有的事件是不影响其他人的，因此对于某些维度进行 注释是没有必要的。 对于这些维度先询问 工作者特定的推理维度是否合理。 
+11. atomic统计: KG contains 300K nodes 使用24K基础事件.   数据不是一个专家确定的 labels，而是一个 likely inferences ,一致性挺强的。
+
+12. 实验-模型
+12.1 任务: 有条件的序列生成任务：给定一个 事件短语E, 一个推理维度C,模型的生成目标: t = f(e,c).  当作 multitask encoder-decoder设置 [简单来说还是 常识的生成，在训练之后可以使用模型  仅仅使用 事件1和关系然后生成可能的事件2，没有讲到怎样将图谱用到别的数据集上]
+12.2 Encoder: Bi-GRU  e[长度为n的短语] 编码为 一个向量。 
+12.3 Decoder: Bi-GRU 
+12.4 Single vs. Multitask learning
+    将常识性维度和多任务建模结合起来，利用了常识维度的层次结构。 
+    1) event2(in)voluntary: 4-encoder: 自愿  5-encoder: 非自愿
+    2) event2personX/Y: 6-encoder agent   3-encoder theme
+    3) event2per/post: 
+    Single: 9encoder-9decoder单独
+13. Comparison with ConceptNet: 
+13.1 ConceptNet: 关系连接概念图； 关系:类型固定.   但是 conceptnet中的各种推论关系仅仅有 1%。 
+13.2 atomic:专注于事件的顺序和与之相关的社会常识。 atomic中事件和维度很稀疏对应到conceptnet，但是有的维度(如意图)不能清楚映射到conceptnet的关系的任何组合上面。 
+13.3 6个维度可以对应到conceptnet关系，但是重合度很小很小。  
+13.4 25%的事件是conceptnet中发现的。 ---> atomic中提供了大量的新的推理知识,这些知识现有资源无法获取。   
+
+14.相关工作
+    * 众包对于知识描述: 1)基于分类学或者百科全书,更多的是"是什么"的知识，关于 ‘how’ 和 ‘why’特别少。  
+    * OpenCyc 4.0: 239000concepts,2039000facts个lisp-style逻辑。  
+    * 最相关: events and mental-states 常识推理任务: 给定一个用自然语言描述的事件,任务:生成事件中参与者的 反应和意图。 
+15.总结
+    * 提出atomic日常常识推理的事件数据集，if-then关系形式。  
+    * 对于给定事件，自由文本标注注释。  
+}
+
+
+
+
+#### 未读文章: 
+{
+20191016: 
+NumNet: Machine Reading Comprehension with Numerical Reasoning  |   https://arxiv.org/pdf/1910.06701.pdf
+Pruning a BERT-based Question Answering Model              |     https://arxiv.org/pdf/1910.06360.pdf 
+Learning Analogy-Preserving Sentence Embeddings for Answer Selection  |   https://arxiv.org/pdf/1910.05315.pdf
+{
+
+    
+}
+
+Multi-Task Learning for Conversational Question Answering over a Large-Scale Knowledge Base   | https://arxiv.org/pdf/1910.05069.pdf  
+{
+    [20191011] [当前KBQA中对于很大的实体词表的做法是 分解为几个子任务然后顺序的解决，存在问题:pipline问题: 1)误差传递2)监督信号不一致]
+we propose an innovative multi-task learning framework where a pointer-equipped semantic parsing model
+is designed to resolve coreference in conversations, and naturally empower joint learning with a novel type-aware entity detection model. 
+The proposed framework thus enables shared supervisions and alleviates the effect of error propagation. 
+}
+20191021 星期一 
+20191018 NIPS2019  Relational Graph Representation Learning for Open-Domain Question Answering
+{ 
+1. WebQuestionsSP open-domain QA: 使用了文档之间的实体贡献信息，构建图，然后使用 Bi-Attention & 层级attention进行融合;  
+}
+20191018  指针网络做生成的方法        Concept Pointer Network for Abstractive Summarization
+20191022 成分树做语义角色标注  Graph Convolutions over Constituent Trees for Syntax-Aware Semantic Role Labeling  https://arxiv.org/pdf/1909.09814.pdf
+20191022  EMNLP2019 Workshop:  MRQA 2019 Shared Task: Evaluating Generalization in Reading Comprehension   | https://arxiv.org/pdf/1910.09753.pdf
+{
+1. 动机: 为了评价目前MRC模型分泛化性，将18个不同的数据集按照SQuAD的格式进行归一化,然后train-6,dev-6,test-6;进行评测,baseline: MultiQA;  提交模型: 1) data_sampling; 2) Multi-task learning 3)adversaril training; 4)ensembling
+2. 百度 D-Net第一: 用了 NLI 和 passage ranking[是否含有答案],以及多个预训练模型; 
+}
+20191022  KBQA将Query进行模式结构化 |  Question Answering over Knowledge Graphs via Structural Query Patterns
+{
+
+}
+
+20191022 TACL2019 Google AI :  Natural Questions: a Benchmark for Question Answering Research   |  来源: question: Google search engine;   answer: 众包标注到 Wikipedia; 
+{
+1. 数据来源: 
+2. 数据出发点/难点: 
+
+
+
+}
+20191028 lijiwei | A Unified MRC Framework for Named Entity Recognition   | https://arxiv.org/pdf/1910.11476.pdf
+20191028 使用跨语言句子内部的语法结构来学习句子表示    |    Exploring Multilingual Syntactic Sentence Representations  |  https://arxiv.org/pdf/1910.11768.pdf
+20191028 使用句子内部的语法结构增强情感分类,使得关键词的情感随着语法传递   |    Syntax-Aware Aspect Level Sentiment Classification with Graph  Attention Networks   |   https://arxiv.org/pdf/1909.02606.pdf 
+20191028 动态GCN: 可以动态添加 edge,node  |  DYREP: LEARNING REPRESENTATIONS OVER  DYNAMIC GRAPHS [ICLR2019] | https://openreview.net/pdf?id=HyePrhR5KX
+{
+1. 任务: Link predicted & Time predicted     |  
+2. 难点: 1) 怎样建模图的动态变化[结构层面-拓扑变化]? A:拓扑变化;B)节点交互;   2) 怎样利用模型来学习 节点的动态表示,有效的捕获Graph上的时间特性?
+3. 做法: 使用一种 中间媒介[Mediation]的方法连接这两个过程:  association--Embedding--communication  解耦的过程; 
+4. 提出一种 时序注意力机制 使用 密度函数,来学习 时序层面怎样和邻接节点交互; 
+5. 好难啊，我不想看，我看不懂; 
+6. 最后的结果: link pred 和 time pred效果都很好;   
+
+}
+20191028  超图GCN: Hypergraph Neural Networks | https://arxiv.org/pdf/1809.09401.pdf 
+{
+1. 贡献: 1) 提出 HyperGraph NN;  2) 卷积操作; 
+2. 做法: 1) 构图[N * K+1]: CV中目标分类中,使用 KNN等手段对于 特征之间的 距离进行建模,然后选取 node;  node: KNN等按照距离决定的特征; edge:按照KNN决定的对于 每个特征而言的 相连的与否; 
+         2) 
+}
+20191028  mode- edge-  Kernel Graph Attention Network for Fact Verification [开源]  |  FEVER数据集第三;  | https://github.com/thunlp/KernelGAT 
+{
+0. 任务: 事实验证 Fact Verify task;   利用已有的比较确定的知识库 对于 数据中的  claim进行验证,答案的形式为: 三种置信度评分: support--refutes--enough_info;
+1. Kernel的理解: IR中检索相关文章的方法,与一般的GAT的区别在于 attention的计算方式不一样,一般的是  注意力矩阵M直接求 softmax,
+                Kernel的方法则是: 使用 K个 高斯分布的核去采样注意力矩阵M，然后再使用 softmax计算注意力权重的大小; 其中高斯核的采样使得 有了 fine-tune力度的注意力,
+                区别于之前传统的注意力的计算方式; 
+2. 效果: 整体效果和 GAT差不多,但是在  事实验证任务的第一个  阶段:证据句子选择 这个模块的效果比 GAT好得多，主要是 因为注意力的分配好了很多; 
+3. attention entropy来显示的描述attention分布的质量，而不是简单的使用 case-study的方式来做; 
+}
+20191029  知识库使用  |  A Survey on Knowledge Graph Embeddings with Literals: Which model links better Literal-ly?  |  https://arxiv.org/pdf/1910.12507.pdf
+{
+1. 概述：基于文本的知识图嵌入研究: 
+    1.1 KGs： 结构化信息：entity+relations；  kg计算和存储成本很高,KG映射到低维空间，保存 结构和关系信息。 
+    1.2 1) 考虑结构化信息：实体-关系  2) 文本、数值、图像等
+    1.3 对于目前提出的基于KG的嵌入方法进行理论分析和比较。
+
+2. KG: 1)DBpedia; 2)FreeBase; 3)Wikidata; 4)YAGO; 5)
+    2.1 问题: 1) 不同KB不同形式;  2)对大量图进行操作，需要图算法,np-完备问题。  
+    2.2 最先进Trans-E: 是基于结构的，不使用任何文字信息,通常只考虑由通过属性连接的实体组成的三元组(最主要缺点)。很多知识对不上,不能用
+    2.3 文字(Literals)通过2中方式为KG embeddings学习带来优势: 
+        1) 学习新实体的embeddings： 新实体链接不到KG中,但是具有与其相关的文字值，如文本描述。   如 DKRL
+        2) 在基于结构的嵌入模型中改进实体的表示: 在需要一个实体至少出现在最少数量的关系三元组中的情况下,文字对于改进表示学习很重要; 如在知识库中 几个实体都代表一个意思训练不到? 
+            使用包含这些实体的文字值的三元组训练,将改进实体embeddings
+        1)2)使用文字和各自的实体会增加更多的语义,这样类似的实体可以在向量空间中离得近? 理由? 
+        目前很多方法结合文字和KG一起训练,但是未处理 数据类型化文字(data、time).. 因为他们需要额外的语义来学习KG嵌入表示; 
+    
+3. 本文: 重点分析不同的嵌入方法,并分析它们在应对不同的挑战时的优缺点。  2) 对链路预测任务，综述不同KG嵌入模型效果. 
+4. 贡献: 
+    4.1 对于目前 文字增强KG Embedding 的模型进行调研,并且分类; 
+    4.2 相同设置下不同 KG Embeddings模型对于链路预测任务的评价; 
+    4.3 指出文字+结构 对于KG Embeddings的研究方向; 
+5. 相关工作:   [生成KG嵌入的sota方法]   [具体见 图标分类-transE、Trans-A等]
+    5.1 已提出的KG嵌入可以分为:  1) 翻译模型    2)语义匹配模型   3) 包含实体类型  4)包含关系路径的模型  
+                               5)使用逻辑规则的模型  6)使用时间信息的model  7) 使用图结构model
+                               8) 包含文字信息的model.    
+    5.2 之气综述:  1) 基于因式分解  2)基于Node2Vec:主要关注基于结构的嵌入;    没有一个包括现有 使用文字的KG嵌入模型。 
+        本文讨论了: 文本的类型、嵌入方法、嵌入模型的应用和任务， 以及 使用文字模型的分类
+    
+
+
+6. 问题定义、研究，讨论 基于文字的KG嵌入技术
+    6.1 问题定义: KG 包含一系列三元组: K < E * R * (E+L)   E:entities  L:文字(a string、data、number)  R:relations  尾实体是文字时:属性三元组
+    6.1 relation分类:根据尾实体类型: 1) entity： Object Realtion  2) entity*s values: Data Type Relation
+    6.2 Types of Literals文字类型）:实体或关系不能捕获的附加信息; 
+       1) Text Literals： labels、titles、description、comments等；  进一步可分为: 长文本[实体描述、注释等] 、 短文本[标题、labels]
+       2) Numeric Literals:  数字作为不同的嵌入实体是值得的，因为有各自的语义需要覆盖，而字符串距离无法衡量，如: 112跟接近113而不是11
+       3) 测量单位：如km、mm、cm
+       4) Image Literals： 图像提供潜在信息， 如年龄、性别等可以通过CV来进行分析; 
+       5) Other Types of Literals: ...
+    6.3 挑战分析: 针对KG不同的信息建模. 
+        1) 知识结构中的 结构化(尾实体是entity的三元组) 和 非结构化信息(属性三元组) 如何融合到 表征学习中去? 
+        2) 文字(Literals)的异构性如何被捕获到表示学习中?
+
+
+7. 用于训练 或  评估 KG嵌入模型的不同任务- Knowledge Graph Embeddings with Literals
+    7.1 Models with Text Literals  
+        1) Extended RESCAL:  张量分解--跳过
+        2) DKRL: TransE的扩展，对于每个实体e，学习两种向量表示而且在同一个向量空间中。 
+        3) KDCoE: 多语言对齐[未看]
+        4) KGlove with Literals: 将实体的描述纳入 embedding.  在DBPedia上，将实体的摘要、注释作为 描述。 主要是从 文本描述中提取命名实体，并对文章中的实体使用CBOW进行训练。 
+        总结: A: 上述模型区别在于 文本和结构化知识结合的方法。  B:DKRL、KDCoE是为在KG只有属性三元组的新实体设计的。
+
+    7.2 Models with Numeric Literals
+        1) [不懂]MT-KGNN: 为了学习entity、entity属性、data属性。 由 Relational Net 、 Attribute Net组成。
+        2）[不懂]KBLRN:
+        3) [不懂]LiteralE： 
+        4) [不懂]TransAE: transE--transAttribute
+    7.3 Models with Images
+        1) [不懂] IKRL: 将结构的表示 和 图像的表示 相结合，利用实体的 图像进行 KG表示学习。  问题: 三元组对于 两个实体都需要有 与他们相关联的图像。 
+
+        2) [不懂] 
+    7.4 Models with Multi-modal Literals ： 多于一种的; 
+        1) LiteralE with blocking
+        2) LiteralE with blocking
+        3) MKBE
+
+8. 现有的 KG Embeddings嵌入模型在 链路预测任务实验 
+    头实体预测：
+    尾实体预测：
+    关系预测： 
+
+    三元组分类-
+    实体分类-
+    实体对齐-
+   
+9. 总结
+    9.1 KG Embedding技术受到了关注， in-KG、out-of-KG. 
+    9.2 现有KG Embedding 缺点:
+        1)  未考虑 data type/units对于 文字语义影响
+        2） 数字嵌入效果差
+        3） 未处理 multi-valued literals
+        4) 多模态考虑简单-视频等
+
+
+10.一些总结: 
+    * 分布式推理: 
+        TransE:  受word2vec启发，利用了词向量的平移不变现象，将每个三元组实例 (head，relation，tail) 中的关系 relation 看做从实体 head 到实体 tail 的翻译，通过不断调整h、r和t (head、relation 和 tail 的向量)，使 (h + r) 尽可能与 t 相等 
+        TransH: 针对一对多、多对一、多对多关系（eg：（美国，总统，奥巴马）和（美国，总统，特朗普）），TransH模型对于每一个关系 ，假设有一个对应的超平面，实体在不同平面内有不同的投影，即同一实体在不同关系下有不同的表示，解决一对多等问题
+        TransR: 一个实体是多种属性的综合体,不同关系对应实体的不同属性,即 头尾节点和关系可能不在一个向量空间中。为了解决这个问题，提出了TransR. 
+                TransH模型是为每个关系假定一超平面,将实体投影到这个超平面进行翻译。 而 TransR模型是为每个关系假定一 语义空间，将实体映射到这个语义空间上进行翻译. 
+        TransD: 关系r可能代表不同的含义，location来讲，它既可以表示 山脉-国家 之间的关系，又可以表示 地区-国家 之间的关系，本质上还是由 实体语义空间 和 关系语义空间 两个空间组成. 
+    * 张量分解模型：张量分解苏三发是将整个知识图谱看成一个大的张量，通过张量分解技术分解为很多小的张量片，即将 高维的知识图谱进行降维 处理。 
+                  不足: 不考虑知识图谱的路径特点，无法深层次挖掘实体的关系
+    * 距离模型： 
+        * 经典算法：SE模型
+                  首先将实体用向量进行表示，然后通过 关系矩阵 将实体投影到 与实体关系对 的向量空间中，最后通过计算 投影向量 之间的距离 来判断 实体间 已存在的关系的 置信度。 
+
+}
+20191029  结合了张量积表示[TPRs]和Bert的结构表征能力   |     HUBERT UNTANGLES BERT TO IMPROVE TRANSFER ACROSS NLP TASKS
+{}
+20191029 XLNet和会话中的口语理解[SLU]进行结合    |   MODELING INTER-SPEAKER RELATIONSHIP IN XLNET FOR CONTEXTUAL SPOKEN  LANGUAGE UNDERSTANDING
+{}
+20191029 Bert 在 Multi-hop QA任务上的分析 [1.构建对抗数据  2. 针对某种类型的问题分析]    |   What does BERT Learn from Multiple-Choice Reading Comprehension Datasets?   |   https://arxiv.org/pdf/1910.12391.pdf
+{}
+20191029  |  Look-up and Adapt: A One-shot Semantic Parser
+{}
+20191029 使用义元做对抗攻击1) 攻击效果比词嵌入相似度或者同义词等的攻击效果好; 2)攻击模型通过对抗训练之后鲁棒性更强;  | Open the Boxes of Words: Incorporating Sememes into Textual Adversarial Attack  | https://arxiv.org/pdf/1910.12196.pdf 
+{} 
+20191029 动态的超图GNN  |  Dynamic Hypergraph Neural Networks  | https://www.ijcai.org/proceedings/2019/0366.pdf
+{}
+20191031 沈逸康  | Ordered Memory 
+
+20191105 Reasoning Over Paths via Knowledge Base Completion  |  知识库上的路径排序，以及KB中未知边、关系的补全、挖掘。 |   https://arxiv.org/pdf/1911.00492.pdf 
+20191105  Forget Me Not: Reducing Catastrophic Forgetting for Domain Adaptation in Reading Comprehension | MRC中使用源数据做预训练可以提高target性能,但是在 target微调之后在源数据上面会造成 灾难性遗忘。 本文提出客服调优灾难以往方法  |   https://arxiv.org/pdf/1911.00202.pdf 
+
+20191106 Integrating Dictionary Feature into A Deep Learning Model for Disease Named Entity Recognition  |  将疾病词典加入 NER  
+20191106   对话中完形填空式阅读理解  |  Design and Challenges of Cloze-Style  Reading Comprehension Tasks on Multiparty Dialogue
+{}
+20191106 中文预训练 [创新工场-港科] |  ZEN: Pre-training Chinese Text Encoder Enhanced by N-gram Representations
+{} 
+
+
+20191107 KGNN[目前排名很靠后，3-19提交榜单]| Multi-Paragraph Reasoning with Knowledge-enhanced Graph Neural Network
+20191107  KG Embedding  |   CoKE: Contextualized Knowledge Graph Embedding
+20191107  KG Embedding & NLI  |  Heuristics for Interpretable Knowledge Graph Contextualization
+20191107  NLI中加入知识   |   Infusing Knowledge into the Textual Entailment Task Using Graph Convolutional Networks
+20191107  利用KG |   OpenDialKG: Explainable Conversational Reasoning with Attention-based Walks over Knowledge Graphs
+20191107  KBQA - |    Knowledge graph embedding based question answering
+
+
+20191111  NIPS2019 词嵌入的不变性和可识别性问题 | Invariance and identifiability issues for word embeddings  
+{}
+20191111   做SRL将现有Dependency和Span 结合起来  |  Dependency and Span, Cross-Style Semantic Role Labeling on PropBank and NomBank  
+{}
+20191111  动态编码和静态编码融合| 西湖大学-张越 |  Using Dynamic Embeddings to Improve Static Embeddings
+{}
+20191111  ICLR2020 对Bert进行改进建模长距离文本  | BLOCKWISE SELF-ATTENTION FOR LONG DOCUMENT UNDERSTANDING  
+{}
+20191111  IBM-用于技术支持领域的领域自适应QA  |  The TechQA Dataset
+
+20191111  探索Mask LM中常识、知识问题，结论: 1)能理解各种类型的常识知识，但不能准确理解关系的语义含义。  2)在常识上还有问题      | Why Do Masked Neural Language Models Still Need Common Sense Knowledge?
+{}
+
+20191112  [SQuAD1.1] [科大讯飞-哈工大] 使用对抗训练学习提高阅读理解性能  | Improving Machine Reading Comprehension via Adversarial Training  | https://arxiv.org/pdf/1911.03614.pdf
+{}
+20191112  使用Graph2Graph建模依存分析 | Graph-to-Graph Transformer for Transition-based Dependency Parsing  |   https://arxiv.org/pdf/1911.03561.pdf
+{}
+20191112  1.从语料库构图[KG或Wikipedia进行指导] 2.图建模段落对之间关系 [3个开放域QA] |   Knowledge Guided Text Retrieval and Reading for Open Domain Question Answering  |   https://arxiv.org/pdf/1911.03868.pdf
+{}
+20191112  用知识增强NER，转为 QA形式 | Knowledge Guided Named Entity Recognition
+}
+20191112  mask矩阵中增加 依存约束、共指NER约束、叙事性[人物等] | Attending to Entities for Better Text Understanding
+{}
+20191112   模仿人类信息搜索，对MRC系统进行封装，每次让模型有一小段文字，模型就可以快速学习  | Meta Answering for Machine Reading
+{}  
+20191112   南加州-对于CLS令牌进行了分析，发现cls是有偏的嵌入分布    |  Improving BERT Fine-tuning with Embedding Normalization  |  https://arxiv.org/pdf/1911.03918.pdf
+{
+1. cls的嵌入值 集中在 几个维度上，并且不是以 0 为中心的。 这种偏置嵌入分布对优化过程带来了挑战，因为cls的嵌入的梯度可能会爆炸，导致模型的性能下降。 
+2. 文章提出了几种简单而有效的归一化方法来修改 fine_tune过程中的cls嵌入。  
+}  
+20191113 [机器翻译任务] [attention的进一步应用和改进，可以结合任务使用，非任务相关]| Two-Headed Monster And Crossed Co-Attention Networks
+{
+1. Two-Headed Monster(THM): 两个对称的编码器  +   一个与  co-attention连接的解码器组成。  
+2. Crossed Co-Attention Nertworks(CCNs) 基于 transformers
+}  
+20191113 知识图谱嵌入工具包[清华2018] | OpenKE: An Open Toolkit for Knowledge Embedding   |  https://www.aclweb.org/anthology/D18-2024.pdf
+
+20191113 [AI2] |  社会偏见框架:关于 语言中的 Social 和 power的推理  | -SOCIAL BIAS FRAMES — Reasoning about Social and Power Implications of Language
+{
+1. 语言具有 强化刻板印象 、 将社会偏见 投射到 其他人身上的力量，这一挑战的核心: 它很少是明确的，而是所有的隐含意义，人们对他人的判断。 
+2. 例子： ‘我们不应该降低标准来雇佣更多的女性’，大多数听众会推断出演讲者 想要表达的涵义：‘女性候选人资质较差’。   
+3. 目前大多数数据集都没有捕获到 人们表达 [社会偏见] 和 [权力差异]的研究和语用框架。  
+4. 目标: 对于人们语言中的  将社会偏见 和 刻板印象 投射到 他人身上的实用主义框架建模。 
+5. 社会偏见推理知识库: 10万结构化标注注释的社会媒体帖子，涵盖超过 26K(2.6万)描述的含义。
+6. 从非结构化文本中学习会复 社会偏见框架。  尽管现有模型可以对 给定句子是否有偏见有很好表现，但是不能 给出更准确的解释。  
+7. 激励将来研究: 将 结构化语用推理  和  社会意义的常识推理 相结合。  
+}  
+
+20191113  [AAAI2020]邱锡鹏-一种新的Multi-task Learning的方法：学习多个热巴舞的稀疏共享架构 | Learning Sparse Sharing Architectures for Multiple Tasks   |   https://arxiv.org/pdf/1911.05034.pdf  
+{}
+20191113  [AAAI2020] 苏州大学-一种 句法信息和SRL结合的方法，multi-task learning方法  |   A Syntax-aware Multi-task Learning Framework for Chinese Semantic Role Labeling |  https://arxiv.org/pdf/1911.04641.pdf
+{}
+
+20191113 [20191109]一种新的基于 平移距离的知识图链接预测方法  | Orthogonal Relation Transforms with Graph Context Modeling for Knowledge Graph Embedding   
+{n - 1,1 - n和N-N的预测仍然具有挑战性。在这项工作中，我们提出了一种新的基于平移距离的知识图链接预测方法。该方法包括两层，首先扩展了旋转方向
+    利用正交变换将二维复域转化为高维空间，以获得更好的建模能力。
+    其次，图形上下文通过两个有向上下文表示显式地建模。这些上下文表示被用作距离评分函数的一部分，以度量训练期间三元组的合理性
+}
+
+
+
+
+
+20191113  清华-KGE的工具封装 |  OpenKE: An Open Toolkit for Knowledge Embedding   
+{}
+
+
+#### 工作相关
+{
+1. 工作的核竞争力:
+1.1 文章: 目前看最可能的是 ���年emnlp的短文或者长文; 国内会议ccks-ccl-nlpcc
+1.2 实习经历: 基本不可能《唯一机会是明年暑假时候; 
+1.3 项目经历: A: 云之声--对话状态跟踪;  B: 云之声--医疗信息抽取;  C: 云之声--口语对话机器阅读理解研究
+1.4 基础算法理解:  A: ppython基础--LeetCode、剑指offer
+1.5 代码能力: A: NLP中关键技术整理研究,以及代码的复现整理;   B: c++  / Linux 下编程能力; 
+1.6 数据机构-Linux-Git-数据库: A: 基础数据结构  B: Linux 基础操作;  C: git 常用; D:数据库; 
+1.7 Github维护两个仓库: A: 机器阅读理解的进展研究,文章_开源代码复现——一些竞赛的收集,中文-英文;  
+                       B: NLP中关键技术论文-代码整理: a: NER 
+                                                    b: Entity-Linking 
+                                                    c: Relation Rxtractor 
+                                                    d: question_sentence pair 
+                                                    e: dst 
+                                                    f: kbqa
+                                                    g: dialog generation 
+                                                    h: event extractor 
+                       C: GCN_GCN在NLP中应用仓库: a: GCN基础教程;
+                                                 b: GCN文章列表; 及代码实现; 
+                                                 c: GCN_NLP; 代码; 
+                       D: nlp中各大竞赛收集: ppt_代码; 
+                       E: LeetCode_python_c++: 图解; 
+                       F: 花书的推导; 代码;  
+                       G: Bert等预训练模型的文章--代码整理; 
+}
+
+
+### GCN 三个仓库: 
+{
+1. https://github.com/thunlp/GNNPapers 
+2. https://github.com/IndexFziQ/GNN4NLP-Papers
+3. https://github.com/nnzhan/Awesome-Graph-Neural-Networks  
+}
+
+### HyperGraph 相关:     介绍: https://blog.csdn.net/weixin_40042143/article/details/82845185 
+{
+1. 概念相关: HyperGraph 相较于普通的 graph最大的区别在于: 普通图边是按照 pair进行链接的，一条边对应两个顶点,
+            但是HyperGraph中一条边可以对应于多个顶点; 例如: 一篇文章的作者可能有多个,但是如果使用多个 普通Graph会有一定的信息损失,
+            比如: 建模一篇文章的作者的时候,将5个边加起来，或者直接使用5条边显然是不合适的.  具体的原因等后面写: 
+            HyperGraph强调的更多的是 集合的概念,一个 HyperEdge 更多说明的是 许多点的集合. 
+2. 一般 Graph可能会使得 顶点的个数非常大,在计算的时候,使用超图可以简化 
+3. 两个在使用上的区别在于: 邻接矩阵不同,一个是 边*ndoe[可以通过边的合并来缩小边的大小,从而增大 node的种类]; 普通的是: node * node; 
+
+3. 如果要将实体的其他信息融合进去,好像现在是没有办法建模的,但是如果通过 HyperGraph是不是就可以把 
+### 动态GCN相关; 
+1. 问句的动态图;  自动生成中间节点,并且可以 mask掉一部分节点,然后进行 2-hop的推理;   目前阅读理解用GCN还没有将问题也转化为 graph，现在都是使用 对于 文章建模,如果将两个图进行比较,融合交互?
+2. 文章GCN的动态图;  文章中可能某个实体交互的过程中可以使用生成 edge或者node,方式进行,这样是不是可以用来建模 Multi-hop； 
+3. 现在的 multi-hop并不是真正的 多调，应该是  NLPR在哪个国家这种,没有中间结果的提示信息;   
+4. HotpotQA中缺失的 entity 或者 
+5. 使用动态图是不是就可以直接生成最后的  推理路径? 然后相应的也可以  添加 node-edge 以及删除 node_edge; 
+6. 两种决策的方式: 1.删除图上的节点路径等;   2.attention机制
+}
+
+
+### pytorch中 model.named_parameters()、model.parameters()、model.state_dict().items():
+{
+1. model.named_parameters()，迭代打印 model.named_parameters()，将会打印每一次迭代元素的 名字和param;  [可以修改parameters.requires_grad=False]
+2. mdoel.parameters(),迭代打印 model.parameters()将会打印每一次迭代元素的 parame而不会打印名字,这是和model.named_parameters()的区别,两者都可以修改 requires_grad的属性; 
+3. model.state_dict().items() 每次迭代打印该选项的话,将会打印所有的  name-param，但是这里所有的 param都是  requires_grad=False, 没有办法改变 requires_grad的属性,所以
+requires_grad的属性只能通过1-2种方式; 
+4.改变了requires_grad之后要修改 optimizer的属性; 
+optimizer = optim.SGD(
+            filter(lambda p: p.requires_grad, model.parameters()),   #只更新requires_grad=True的参数
+            lr=cfg.TRAIN.LR,
+            momentum=cfg.TRAIN.MOMENTUM,
+            weight_decay=cfg.TRAIN.WD,
+            nesterov=cfg.TRAIN.NESTEROV)
+5. 随机参数初始化
+def init_weights(m):
+    if isinstance(m,nn.Conv2d):
+        torch.nn.init.xavier_uniform(m.weight.data)
+model.apply(init_weights)
+}
+
+
+
+### DREAM数据集
+{}
+### CosMos数据集
+{}
+### TweetQA数据集
+{}
+
+### md语法
+{
+1. 标题生成: 
+2. 页内跳转: 
+3. 添加图片: 
+}   
+
+### Pytorch模型中的显存问题:  
+{
+1. 显存爆掉--https://blog.csdn.net/xiaoxifei/article/details/84377204
+}
+
+看再多的文章,都不如简单的实现几个模型; 
+
+
+### Language Model with Knowledge: 
+1. [看完-没有借鉴意义，维度拼接][1] Jeff Da  |   BIG MOOD: Relating Transformers to Explicit Commonsense Knowledge [ATOMIC] | 使用了很多知识库，然后在很多数据集上有效果
+{
+1. 将上下文embedding与commonsense graph embedding结合,--> Bert Infused Graphs. 
+2.  1) 一种预处理方法提高查询知识库速度方法。  2) 提出一种 从每个知识库创建知识embedding的方法。  3) tokens对齐的一种方法。   4) 结合KG Embedding提出一种Bert上下文化的方法   5)sota
+3. 提出一种基于常识库的查询与上下文嵌入相结合的方法，注入图：在其他嵌入项上进行匹配，缩写其与人类意识关系。
+    没有使用额外训练，或者微调，从常识库中学习一个单独的表示，增强Bert表示，提出几种 组合 和 查询 知识库嵌入的方法，并引入 Bert Embedding layers
+
+4. 相关工作: Knowledge Integration 
+    4.1 好像什么都没有讲,就说了 ERNIE
+5. 模型: 1) LM adaptation 2)KG Embeddings  3) attention用于分类
+    1) KG Processing: 减少KG的条目.  主要是 KG和外部的匹配
+    2) KG Usage: 查询 三个知识图,为每个单词对于每个KG得到一个Embeddings. 
+        * ConceptNet: ft阶段,检查文本中任何当前的 agent,dependent pairs。  如果 agent 和 dependent都在 text中，则把 relationship index作为 embedding layer的输入。 
+                      对于 span，索引第一个word，但是text中找全span。  span > 10,,随机选一个。  
+        * WebChild
+        * ATOMIC:  对于 text 搜索与 定好的9种 If-Then 关系匹配的关系。  然后根据选择的关系，然后将 索引[0-8]附加到所选三元组中第一个单词的 embedding layer. 
+                    ft： 对于每个单词创建 10-lemgth embedding. 
+    3) 架构: 1） 查询每个知识图,为每个知识图创建 嵌入;  2) 单词级别知识融合过程，为每个单词创建扩展嵌入。  3) 共享数据优化
+
+        * 单词级别知识融合 Token Realignment :  bert最后4层token进行加和,然后融合知识库，维度后面进行拼接connection。 对于KG中没有单词,不进行融合. 
+
+总结:检索到的3个知识库,然后对于word embedding进行拼接，未开源，
+
+
+}
+2. [基本没啥借鉴，感觉还是ft阶段拼接][1][华盛顿&AI2]Exploiting Structural and Semantic Context for Commonsense Knowledge Base Completion | ConceptNet& [ATOMIC] 知识库补全
+{ 主要看怎样在Bert中融合知识，ATOMIC、Concept
+1。解决问题: atomic知识库巨大难以补全，图可能比较稀疏  【难点】
+2. 利用节点的结构和语义上下文来解决这些挑战
+3. 1) 从局部图结构学习，使用图卷积网络和自动图加密，2)从预先训练的语言模型学习到知识图，以增强知识的上下文表示。【我们描述了将来自这两个来源的信息合并到一个联合模型中的方法】
+4. 结果好,并进一步 展示了 语言模型包含的常识性类型。 
+
+5. 补全的两个关键思想: 1) 从语言到知识图的转换学习;  2) 从图结构学习; 
+
+
+结论: 
+    1) Bert含有多少常识?   bert主要擅长捕获分类关系。  对于concept有效，对于atomic效果不大.     怎样将 bert 和 atomic结合起来才是最重要的，bert对于atomic不敏感，因为atomic太复杂了. 
+    2) 图结构信息有重要?   局部图结构信息很重要，整个图不行， 
+    3) 相似诱导 边有用吗？   重要，增强了图嵌入的学习，提高了性能
+}
+3. [没啥借鉴意义]Jeff DaP[华盛顿]| [20191004] Cracking the Contextual Commonsense Code: Understanding Commonsense Reasoning Aptitude of Deep Contextual Representations | Bert常识推理验证 2.提出bert中加入知识
+{
+1. 实验证明Bert的embedding对于 各种常识性特征编码的能力很强，但很多不足。 
+2. 证明使用 缺陷属性相关的附加数据来增加bert的训练数据。   两种方法解决现有表征常识表达不足: 1) 隐式:通过属性选择添加其他数据   2) 显示:bert-ft 加入知识嵌入。 
+3. 提出了一种微调Bert嵌入知识图的方法，并证明显示知识图的重要性。 
+4. 
+
+
+
+}
+4. [race:external dataset  下游任务:MCSript2.0][1] 将常识性的知识合并到语言模型中。 |   Exploring ways to incorporate additional knowledge to improve Natural Language Commonsense Question Answering
+{
+1. 将常识性的知识合并到基于语言模型的方法中去，以便在这些领域更好的回答问题。  
+    1.1 首先 确定了外部知识的来源，并表明，当通过IR检索到一组事实被预订为每个事实时，性能将进一步提高。   
+    1.2 提出了 3种不同的知识传递模式， 5种不同的知识使用模型。  
+    1.3 提出了一种新的架构来处理信息分散在多个知识句子中回答MCQ问题的情况。 
+}
+
+5. GZC总结的文章: 
+Text-Enhanced Representation Learning for Knowledge Graph.
+{
+Text补充KG学习，text-triple结合起来学习。   
+}
+Entity disambiguation by knowledge and text jointly embedding
+{
+
+}
+Bridge text and knowledge by learning multi-prototype entity mention embedding
+{
+通过mention和实体Kg进行联合然后进行训练
+}
+Random walks and neural network language models on knowledge bases 
+{
+随机游走for KG
+}
+Knowledge graph representation with jointly structural and textual encoding
+{
+
+}
+Joint representation learning of text and knowledge for knowledge graph completion
+{
+1. 知识库补全,在统一的语义空间中对文本和知识联合表示学习，可以更好的做 知识库补全。  
+2. 将 word、entity、relations 放入相同的连续的向量空间  KG+Text 一起编码学习到 新的 Fact Representation.  
+}
+2016 liuzhiyuan Knowledge representation via joint learning of sequential text and knowledge graphs
+{
+1. 文本信息是KG知识表示学习的重要补充，从纯文本构建知识面临两个主要挑战: 1) 如何充分利用 纯文本中实体的 顺序上下文(sequential contexts)
+                                    2) 如何动态的为实体选择对应的 信息句.  
+2. 解决: 
+    1) lstm对于实体对应的句子进行编码; 
+    2) 使用 注意力机制来度量每个句子的信息量，进一步构建  基于 文本的实体表示。  
+
+                                }
+Knowledge graph embedding with triple context
+Multi-Task Feature Learning for Knowledge Graph Enhanced Recommendation
+{
+
+}
+
+6. Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering
+{异构图上面推理,初始编码使用Bert,ATOMIC仅仅是引用，不涉及常识推理}
+
+
+7. 反事实推理数据集 | AI2 | Counterfactual Story Reasoning and Generation   |   https://arxiv.org/pdf/1909.04076.pdf  
+
+8. [1]Concept知识库应用到CommonSenseQA推理 | 开源 | KagNet: Knowledge-Aware Graph Networks for Commonsense Reasoning  | https://arxiv.org/pdf/1909.02151.pdf 
+9. [1] 目前表示事件之间的关系都是通过 embedding,本文将事件嵌入  表示为一种多关系的问题，这可以使得事件捕获事件对 的不同方面。  | Multi-Relational Script Learning for Discourse Relations  | https://www.cs.purdue.edu/homes/dgoldwas/downloads/papers/LG_acl_2019.pdf 
+10. [1][华盛顿大学]Event2Mind: Commonsense Inference on Events, Intents, and Reactions | 事件常识推理任务数据集 1.和atomic差不多，给定一个简短的自由形式的文本描述的事件(X早上喝咖啡),一个关于事件的可能意图，X-Y各自可能的反应  
+11. [1]使用wikipedia&concept作为知识源进行常识推理 | Graph-Based Reasoning over Heterogeneous External Knowledge for Commonsense Question Answering 
+12. [1]提出一个超级大的事件相关的知识库资源  | ASER: A Large-scale Eventuality Knowledge Graph  
+13. [1]使用 atomic 和 concept作为种子资源进行知识库补全以及知识库自动构建，最后的实验和 atomic差不多，都是评测事件2的质量 | COMET : Commonsense Transformers for Automatic Knowledge Graph Construction
+14. [1] [微软]|  A Hybrid Neural Network Model for Commonsense Reasoning |    提出了一种混合神经网络(HNN)常识性推理模型。HNN由两个组件模型组成，一个掩码语言模型和一个语义相似模型，它们共享基于bert的上下文编码器，但使用不同的特定于模型的输入和输出层。HNN在三个经典的常识推理任务上获得了最新的技术成果
+15. [1] [CosMos-DEV] 20190920 | Teaching Pretrained Models with Commonsense Reasoning: A Preliminary KB-Based Approach | 使用Concept知识源对于pre-trained模型进行指导增强，模型未知
+16.   了解故事，要对事件和人的心理状态进行推理，数据集将 故事人物的幼稚心理解释为与动机和情绪反应相关的完全指定的心理状态链  [数据集]|  Modeling Naive Psychology of Characters in Simple Commonsense Stories  
+17. [KEAG] 将知识融入到生成式的MRC,在原来seq2seq的基础之上增加一个 Source Selector模块 | Incorporating External Knowledge into Machine Reading for Generative Question Answering 
+18. 从问题中发现缺失需要的知识，然后在知识库中进行查找 [AI2]| What’s Missing: A Knowledge Gap Guided Approach for Multi-hop Question Answering
+19. [ReCoRD、SQuAD1.1 ]Enhancing Pre-Trained Language Representations with Rich Knowledge for Machine Reading Comprehension |  采样一种注意力机制,自适应的从KBs中选择所需要的知识,然后将选择的知识和于Bert进行融合，从而实现上下文感知和知识感知的表示预测。  
+20. [KB知识根据Question选择,然后编码embedding融入]Yuanfudao at SemEval-2018 Task 11: Three-way Attention and Relational Knowledge for Commonsense Machine Comprehension   |  使用了三重关注网络来模拟 文章-问题-答案之间的交互。 加入常识: augment the input with relation embedding from Concept。
+21  [1][OpenbookQA、ARC、SemEval2018][ACL2019] Improving Question Answering by Commonsense-Based Pre-Training  |  文章觉得一般推理差主要是: 概念之间缺乏常识的联系。 Concept. 预先训练了概念之间的直接和间接的关系函数，并证明这些预训练的函数可以很容易的添加到现有的神经网络模型中去。  
+22. SemEval-2018 & Cloze Story Test | [20190905][阿里]Incorporating Relation Knowledge into Commonsense Reading Comprehension with Multi-task Learning | 使用多任务:1)label 2)relation existence 判断 3)relation type判断
+23. 推荐系统 [微软]| 提出在协同过滤基础上将知识图作为边信息的来源，多任务学习MKR  | Multi-Task Feature Learning for Knowledge Graph Enhanced Recommendation
+24.    [2018] | Knowledge Graph Embedding with Entity Neighbors and Deep Memory Network
+{
+KG Embedding近年来的研究重点是: 将结构知识与附加信息相结合，如 实体描述、关系路径等。 然而，常用的 附加信息通常包含大量的噪声，这使得学习有价值的表示非常困难。 
+1. 本文提出一种新的附加信息，称为: 邻接实体(entity neighbors),它包含了 给定 实体的  语义信息和拓扑特征。    
+2. 然后开发一种 深内存(deep memory network) 来encode the neighbors information. 
+3. 利用门控机制，将  结构和neighbors的表示融合到一个表示中。  
+}
+
+25.  针对OpenKG这种不规范化的KG进行规范化的统一嵌入Embedding  |   [emnlp2019]  |   CaRe: Open Knowledge Graph Embeddings
+
+
+
+
+
+#### Question? 
+1. 为什么知识推理相关的能力深度学习模型表现比较差？   
+    1.1 常识性知识是隐含的，统计学习模型无法通过报告偏差学习(2013)
+2. 怎么才算是真正的把外部的知识融入到了模型中去？ 怎么样评价？
+3. 将外部知识融入的方法有哪些？ 有哪几类？ 
+4. 根据自己的任务比如: CosMos这个任务能用到的外部知识源有哪些？  怎么样才算是可以真正可以拿过来相关的直接进行使用?
+5.动态规划  转换为  有向无环图  或者 超图?   利用 图的随机游走算法能不能建模 Multi-hop Reanson?  动态规划算法求图上节点之间的最短路径 是不是也算是一种建模 multi-hop reasonIng 的一种方法? 
+
+### CosMos数据集: 
+{
+1. 事件相关外部可用资源: 1) ATOMIC:最吻合数据集    2)Event2Mind:意图和X-Y的反应   3) ASER:超大事件相关常识资源   4) story-dataset 
+2. 外部知识库使用方法: 1) 异构数据源直接使用Bert编码，然后使用GCN进行推理;   2) 多任务引入，比如知识库补全等.    3) 在做选择时候增加知识选择器    4) 
+3. 外部知识库检索到 怎么用?   
+4. CosMos能用吗？证据是什么? 
+}
+{
+ConceptNet/WebChild/ATOMIC/
+}
+
+
+### HotpotQA: 
+{ 仅仅算是继续跟进不做研究了解 over
+* [SAE] [20190904] |  Select, Answer and Explain: Interpretable Multi-hop Reading Comprehension over Multiple Documents  |  京东  | 目前开源第一 
+ 1. 首先过滤与答案无关的文章，减少干扰信息的数量：通过一种新的 pairwise learning-to-rank loss. 
+ 2. 然后将选的文章 输入 模型，同时预测: answer+support doc-sentence,并在两种任务中使用注意力机制。 
+
+ 3. 贡献： 
+    3.1 设计一个  文档选择模块，过滤与答案无关的文档，分散最后注意力信息。  实现: 基于文档嵌入的 multi-head self-attention ，考虑文章之间的相互作用。  提出: 两两学习pairwise损失，提高 support的acc
+    3.2 answer and explain 模块: 多任务学习训练，联合 answer predict &  support doc.  实现: 使用 上下文句子作为嵌入，构建GNN multi-hop reason graph,而不是像之前 entity-graph。   
+    3.3 一种新的 mixed attentive pooling 机制：在summary token embeddings将文本转换为node，然后用于GNN node表示。  注意权值是通过amswer_span 和 self-attention 输出来计算的。 优点: 可以利用‘answer’ 和 ‘explain’ 之间的互补信息.
+
+* HGN目前第二  [未开源] [段落、句子、实体三级GCN] | Hierarchical Graph Network for Multi-hop Question Answering  | https://arxiv.org/pdf/1911.03631.pdf  
+1.GCN分别从 段落top2、句子support任务、实体进行构建，然后最主要的 span抽取并不是在  graph上进行的，而是使用了  lstm 抽取span
+2. GCN作为辅助任务 或者  多任务进行学习，对于  主要目标被当作正则化项去学习
+
+
+
+}
